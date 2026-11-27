@@ -1,9 +1,8 @@
 @font-face{font-family:"Alexandria";src:url("Alexandria.woff") format("woff");font-weight:100 900;font-display:swap}
 @font-face{font-family:"Plex";src:url("IBMPlexSansArabic-Regular.woff") format("woff");font-weight:400;font-display:swap}
 @font-face{font-family:"Plex";src:url("IBMPlexSansArabic-SemiBold.woff") format("woff");font-weight:600;font-display:swap}
-:root{--bg:#fff;--fg:#0a0a0a;--muted:#6b6b6b;--border:#e5e5e5;--frame:#f5f5f5;--soft:#f5f5f7;--brand:#129270;--deep:#0b3b2e;--gold:#e9b949;--vh:100vh}
+:root{color-scheme:dark;--bg:#0a0a0a;--fg:#fafafa;--muted:#a3a3a3;--border:#262626;--frame:#171717;--soft:#141414;--brand:#129270;--deep:#0b3b2e;--gold:#e9b949;--vh:100vh}
 @supports (height:100svh){:root{--vh:100svh}}
-@media (prefers-color-scheme:dark){:root{--bg:#0a0a0a;--fg:#fafafa;--muted:#a3a3a3;--border:#262626;--frame:#171717;--soft:#141414}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Plex",system-ui,sans-serif;line-height:1.8}
@@ -15,7 +14,7 @@ a{color:inherit}
 /* الشريط العلوي */
 .bar{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:12px 18px;background:color-mix(in srgb,var(--bg) 76%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);transition:background .4s,color .4s}
 .bar .brand img{height:26px}
-@media (prefers-color-scheme:dark){.bar .brand img{filter:brightness(0) invert(1)}}
+.bar .brand img{filter:brightness(0) invert(1)}
 .bar nav{display:none;gap:1.6rem;font-size:.86rem;color:var(--muted)}
 .bar nav a{text-decoration:none}.bar nav a:hover{color:var(--fg)}
 @media (min-width:820px){.bar nav{display:flex}.bar{padding:14px 32px}}
@@ -25,7 +24,7 @@ a{color:inherit}
 
 /* طباعة مشتركة */
 .label{margin:0 0 .6rem;font:600 .86rem "Plex";color:var(--brand)}
-.h2{margin:0;font:800 clamp(2.3rem,10.5vw,5.2rem)/1.14 "Alexandria","Plex",sans-serif;letter-spacing:-.01em}
+.h2{margin:0;font:800 clamp(2.3rem,10.5vw,5.2rem)/1.36 "Alexandria","Plex",sans-serif;letter-spacing:-.01em}
 .lead{margin:1rem auto 0;max-width:30rem;color:var(--muted);font-size:1.02rem}
 @media (min-width:768px){.lead{font-size:1.2rem;max-width:36rem}}
 .intro{padding:0 1.4rem;text-align:center}
@@ -285,3 +284,145 @@ footer p{margin:.8rem 0 0;line-height:1.7}
 .spark path[data-k=line]{stroke-width:3;transition:stroke-dashoffset 2.2s cubic-bezier(.3,.7,.2,1)}
 .spark path[data-k=area]{transition:opacity 1.4s .9s}
 @media (min-width:1000px){.lives{grid-template-columns:repeat(3,1fr);width:min(100% - 2.4rem,78rem);margin:2.4rem auto 0;padding:0}.live .num{font-size:4.6rem}}
+
+/* 27/11 14:32 (محمد): «الخلفية البيضة عم تعطي رخص» و«اطارات الجوال ابيض مو اسود»: مظهر داكن واحد للجميع، وإطار هاتف أسود */
+.body{background:linear-gradient(145deg,#2c2c2e 0%,#151516 45%,#050505 100%);border-color:#3a3a3c}
+.btn{background:#2c2c2e}
+.brand-g{color:#3dd598}
+
+/* 27/11 14:33 (محمد): «لو اخضر… او اسلوب شمس يسر مموه اجمل، ابتكر»: سماء يُسر خلفيةً للموقع كله.
+   أخضر التطبيق، وشمسه الذهبية المموّهة بحلقاتها تعبر السماء مع التمرير، من الفجر إلى الليل. */
+:root{--bg:#06140f;--soft:rgba(255,255,255,.075);--border:rgba(255,255,255,.17);--muted:rgba(255,255,255,.72);--frame:#101412}
+html{background:#041510}
+body{background:transparent}
+.sky{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:linear-gradient(180deg,var(--sky-a,#0e5a44),var(--sky-b,#072a21))}
+.sun{position:absolute;left:var(--sx,84%);top:var(--sy,15%);width:46vmin;height:46vmin;transform:translate(-50%,-50%);will-change:left,top}
+.sun::before{content:"";position:absolute;inset:-85%;border-radius:50%;background:radial-gradient(circle,rgba(var(--sun,244,203,104),.3) 0%,rgba(var(--sun,244,203,104),.1) 34%,transparent 64%)}
+.disc{position:absolute;inset:20%;border-radius:50%;background:radial-gradient(circle,rgba(var(--sun,244,203,104),1) 0%,rgba(var(--sun,244,203,104),.72) 46%,rgba(var(--sun,244,203,104),0) 74%);filter:blur(16px)}
+.ring{position:absolute;inset:4%;border-radius:50%;border:1px solid rgba(var(--sun,244,203,104),.42)}
+.ring.r2{inset:-18%;border-color:rgba(var(--sun,244,203,104),.26)}
+.ring.r3{inset:-46%;border-color:rgba(var(--sun,244,203,104),.14)}
+.haze{position:absolute;inset:0;background:radial-gradient(95% 55% at 0% 100%,rgba(18,146,112,.38),transparent 70%),radial-gradient(70% 45% at 100% 62%,rgba(10,60,46,.5),transparent 72%)}
+.label{color:var(--gold)}
+.get{background:linear-gradient(135deg,#f3cf6b,#e2a92f);color:#1d1503}
+.dots i.on{background:var(--gold)}
+.lines li.on::before{background:var(--gold);box-shadow:0 0 0 .22em rgba(233,185,73,.25)}
+.top i{color:var(--gold)}
+.tile,.live,.offer div{border:1px solid rgba(255,255,255,.1)}
+.tile .shot{background:linear-gradient(180deg,rgba(233,185,73,.2),rgba(255,255,255,0))}
+.kpis div{background:rgba(0,0,0,.26)}
+.offer .mine{border-color:transparent}
+.garage{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02))}
+.safe{background:rgba(2,9,7,.6)}
+.end{background:linear-gradient(180deg,rgba(2,7,5,0),rgba(2,7,5,.78) 46%,rgba(2,7,5,.9))}
+.bar{background:rgba(6,30,23,.62)}
+.bar.dark{background:rgba(4,16,12,.72)}
+.rows .track{background:rgba(255,255,255,.12)}
+.screen{background:#0b1512}
+
+/* 27/11 14:37 (محمد): «خليها مموهة الخلفية لما تتداخل مع حدة الكتابة وافتح من هيك»: الشمس وحلقاتها مموّهة كلها، والأخضر أفتح */
+html{background:#0d5a45}
+.sky{background:linear-gradient(180deg,var(--sky-a,#1c8a6a),var(--sky-b,#0f5c47))}
+.sun{filter:blur(22px)}
+.disc{filter:none;inset:16%}
+.ring{border-width:10px;border-color:rgba(var(--sun,244,203,104),.2)}
+.ring.r2{border-color:rgba(var(--sun,244,203,104),.13)}
+.ring.r3{border-color:rgba(var(--sun,244,203,104),.08)}
+.sun::before{background:radial-gradient(circle,rgba(var(--sun,244,203,104),.26) 0%,rgba(var(--sun,244,203,104),.09) 36%,transparent 66%)}
+.haze{background:radial-gradient(95% 55% at 0% 100%,rgba(60,190,150,.28),transparent 70%),radial-gradient(70% 45% at 100% 62%,rgba(12,80,62,.4),transparent 72%)}
+:root{--muted:rgba(255,255,255,.82);--soft:rgba(255,255,255,.1);--bg:#0d4a39}
+.safe{background:rgba(3,30,23,.42)}
+.end{background:linear-gradient(180deg,rgba(3,22,17,0),rgba(3,22,17,.5) 46%,rgba(3,22,17,.66))}
+.bar{background:rgba(13,74,57,.62)}
+.bar.dark{background:rgba(8,46,36,.7)}
+.garage{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02))}
+.lines li{color:rgba(255,255,255,.36)}
+.kpis div{background:rgba(0,0,0,.2)}
+
+/* 27/11 14:39 (محمد): «فتحها اكتر اقرب للابيض»: سماء يُسر في وضح النهار. خلفية فاتحة قريبة من الأبيض بمسحة خضراء،
+   وشمس ذهبية مموّهة، وكتابة خضراء غامقة. البطاقات الخضراء (الإحصاءات، المساعد) والخاتمة تبقى غامقة للتباين. */
+:root{color-scheme:light;--bg:#eef7f2;--fg:#0b2b22;--muted:rgba(11,43,34,.74);--border:rgba(11,59,46,.14);--soft:rgba(255,255,255,.72);--brand:#0f8062}
+html{background:#eef7f2}
+.sky{background:linear-gradient(180deg,var(--sky-a,#f6fcf8),var(--sky-b,#def2e8))}
+.sun{filter:blur(26px)}
+.disc{background:radial-gradient(circle,rgba(var(--sun,246,205,96),.95) 0%,rgba(var(--sun,246,205,96),.6) 46%,rgba(var(--sun,246,205,96),0) 74%)}
+.ring{border-color:rgba(var(--sun,246,205,96),.3)}
+.ring.r2{border-color:rgba(var(--sun,246,205,96),.2)}
+.ring.r3{border-color:rgba(var(--sun,246,205,96),.12)}
+.sun::before{background:radial-gradient(circle,rgba(var(--sun,246,205,96),.34) 0%,rgba(var(--sun,246,205,96),.12) 36%,transparent 66%)}
+.haze{background:radial-gradient(95% 55% at 0% 100%,rgba(18,146,112,.17),transparent 70%),radial-gradient(70% 45% at 100% 62%,rgba(120,205,170,.2),transparent 72%)}
+.bar{background:rgba(244,251,247,.72);color:var(--fg)}
+.bar .brand img{filter:none}
+.bar.dark{background:rgba(8,46,36,.7);color:#fff}
+.bar.dark .brand img{filter:brightness(0) invert(1)}
+.label{color:var(--brand)}
+.dots i.on{background:var(--brand)}
+.top i{color:var(--brand)}
+.screen{background:#fff}
+.tile,.live,.offer div{border:1px solid rgba(11,59,46,.09);box-shadow:0 18px 40px -30px rgba(8,50,38,.45)}
+.tile .shot{background:linear-gradient(180deg,rgba(18,146,112,.16),rgba(255,255,255,0))}
+.tile .shot img{box-shadow:0 14px 34px -12px rgba(8,50,38,.4)}
+.offer .mine{border-color:transparent}
+.kpis div{background:rgba(18,146,112,.09)}
+.rows .track{background:rgba(11,59,46,.1)}
+.card{box-shadow:0 18px 40px -18px rgba(8,50,38,.4)}
+.ph img{box-shadow:0 20px 40px -22px rgba(8,50,38,.45)}
+.body{box-shadow:0 10px 20px rgba(8,50,38,.14),0 40px 60px -20px rgba(8,50,38,.4)}
+/* المركبة على الخلفية الفاتحة */
+.garage{background:none;color:var(--fg)}
+.garage .label{color:var(--brand)}
+.big.top{color:#0b3b2e}
+.big.bot{-webkit-text-stroke:1.5px rgba(11,59,46,.8)}
+.floor{background:radial-gradient(closest-side,rgba(8,50,38,.34),transparent)}
+.garage .lead,.sum{color:var(--muted)}
+.st{color:var(--fg);background:rgba(255,255,255,.72);border-color:var(--border)}
+.st.on{background:#0b3b2e;color:#fff;border-color:#0b3b2e}
+.facts div{border-top-color:var(--border)}
+.facts span{color:var(--muted)}
+.garage .tile{background:var(--soft);color:var(--fg)}
+.garage .tile .shot{background:linear-gradient(180deg,rgba(18,146,112,.16),rgba(255,255,255,0))}
+.garage .tile p{color:var(--muted)}
+/* الأمان */
+.safe{background:linear-gradient(180deg,rgba(18,146,112,0),rgba(18,146,112,.1) 22%,rgba(18,146,112,.1) 78%,rgba(18,146,112,0));color:var(--fg)}
+.safe .label{color:var(--brand)}
+.lines li{color:rgba(11,43,34,.26)}
+.lines li.on{color:#0b3b2e}
+.lines li.on::before{background:var(--gold);box-shadow:0 0 0 .22em rgba(233,185,73,.3)}
+/* الخاتمة: لوحة خضراء غامقة تُنهي الصفحة */
+.end{margin-top:5rem;border-radius:2.6rem 2.6rem 0 0;background:radial-gradient(90% 50% at 50% 100%,rgba(47,196,137,.34) 0%,transparent 70%),linear-gradient(180deg,#127a5e,#0b4a39 52%,#072c22)}
+
+/* 27/11 14:39 (محمد): «نسق الاقسام صح»: مسافة واحدة بين الأقسام */
+.focus{padding:6rem 0 0}
+.chapter{padding-top:6.5rem}
+.garage{margin-top:0;padding:6.5rem 0 0}
+.who,.skyy{padding:6.5rem 0 0}
+.faq{padding:6.5rem 1.4rem 1rem}
+.stats{padding-bottom:0}
+.row{padding-bottom:.6rem}
+.more{padding-top:4rem}
+
+/* مساعد يُسر (27/11، محمد: «المساعد الذكي ما جبت سيرته… وايقونته المتحركة») */
+.soon{display:inline-block;margin:1.1rem 0 0;padding:.34rem 1rem;border-radius:99px;font:600 .8rem "Plex";color:#6a4a06;background:rgba(233,185,73,.24);border:1px solid rgba(196,146,28,.4)}
+.aicard{width:min(100% - 2.4rem,32rem);margin:2.4rem auto 0;padding:1.3rem 1.3rem 1.25rem;border-radius:1.8rem;color:#fff;text-align:start;background:radial-gradient(120% 90% at 85% 0%,#1b7d60,#0e5440 55%,#0a3a2c);box-shadow:0 34px 60px -34px rgba(8,50,38,.7)}
+.aihead{display:flex;align-items:center;gap:.85rem}
+.aiorb{position:relative;flex:none;width:4.6rem;height:4.6rem;border-radius:1.5rem;background:rgba(255,255,255,.09)}
+.aiorb canvas{position:absolute;left:50%;top:50%;width:7.5rem;height:7.5rem;transform:translate(-50%,-50%);display:none;pointer-events:none}
+.aimark{position:absolute;inset:16%;width:68%;height:68%;overflow:visible}
+[dir=ltr] .aimark{transform:scaleX(-1)}
+.aiorb.live canvas{display:block}.aiorb.live .aimark{visibility:hidden}
+.aihead b{display:block;font:800 1.2rem/1.35 "Alexandria","Plex",sans-serif}
+.aihead small{display:block;min-height:1.6em;font-size:.84rem;color:rgba(255,255,255,.76)}
+.aiask{margin-inline-start:auto;flex:none;font:600 .82rem "Plex";padding:.42rem .95rem;border-radius:99px;background:linear-gradient(135deg,#f3cf6b,#e2a92f);color:#1d1503;transition:transform .2s}
+.aiask.tap{transform:scale(.9)}
+.aiwhere{margin:1.15rem 0 .5rem;font:600 .8rem "Plex";color:var(--gold)}
+.aiout{margin:0;min-height:10.6rem;padding:1rem 1.1rem;border-radius:1.2rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);font-size:1rem;line-height:1.9}
+.aiout.wait{color:rgba(255,255,255,.6)}
+.aibtns{display:flex;gap:.5rem;margin-top:.9rem;opacity:.35;transition:opacity .5s}
+.aibtns.on{opacity:1}
+.aibtns span{font:600 .84rem "Plex";padding:.42rem 1rem;border-radius:99px;border:1px solid rgba(255,255,255,.3)}
+.aibtns .use{background:#fff;color:#0b3b2e;border-color:#fff}
+.aichips{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;width:min(100% - 2.4rem,40rem);margin:1.6rem auto 0;padding:0}
+.aichips li{font:600 .86rem "Plex";padding:.42rem 1rem;border-radius:99px;background:var(--soft);border:1px solid var(--border);transition:background .4s,color .4s,border-color .4s}
+.aichips li.on{background:#0b3b2e;color:#fff;border-color:#0b3b2e}
+.ai .facts.light{margin-top:2.2rem}
+@media (min-width:768px){.aiout{min-height:8.6rem}}

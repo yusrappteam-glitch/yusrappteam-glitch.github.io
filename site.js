@@ -193,13 +193,14 @@ var m4 = {
   rx: function (a) { var c = Math.cos(a), s = Math.sin(a); return new Float32Array([1, 0, 0, 0, 0, c, s, 0, 0, -s, c, 0, 0, 0, 0, 1]); },
   tr: function (x, y, z) { return new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, x, y, z, 1]); }
 };
+var CAR_SMOOTH = window.YUSR_CS === undefined ? 0 : window.YUSR_CS, CAR_NSMOOTH = window.YUSR_CN === undefined ? 10 : window.YUSR_CN;
 var car = {
   gl: null, model: null, states: { door_fl: 'paint', door_fr: 'paint', fender_fl: 'touch', quarter_rr: 'touch', hood: 'ok', trunk: 'new' }, sel: 'paint', yaw: 0.75, pitch: 0.2, drag: null, flash: 0, flashZone: 0, lastPart: null,
   init: function () {
     var self = this, c = $('#car'), gl = this.gl = glOf(c, { antialias: true });
     this.labels();
     if (!gl || !window.YUSR_CAR_SEDAN) { $('#carSum').textContent = ''; return; }
-    this.pr = prog(gl, '#version 300 es\nin vec3 aP;in vec3 aN;in vec2 aT;in float aZ;uniform mat4 uVP,uM;out vec3 vN;out vec2 vT;out vec3 vW;flat out int vZ;\nvoid main(){vec4 w=uM*vec4(aP,1.);vW=w.xyz;vN=mat3(uM)*aN;vT=aT;vZ=int(aZ+.5);gl_Position=uVP*w;}', '#version 300 es\nprecision highp float;in vec3 vN;in vec2 vT;in vec3 vW;flat in int vZ;uniform sampler2D uTex;uniform vec4 uCol[20];uniform int uFlash;uniform float uPulse;uniform vec3 uEye;out vec4 o;\nvoid main(){vec3 n=normalize(vN);if(!gl_FrontFacing)n=-n;vec3 base=texture(uTex,vT).rgb;vec4 st=vZ>0&&vZ<20?uCol[vZ]:vec4(0.);\nfloat l=max(dot(n,normalize(vec3(.4,.9,.5))),0.);vec3 V=normalize(uEye-vW);vec3 H=normalize(normalize(vec3(.4,.9,.5))+V);float sp=pow(max(dot(n,H),0.),48.)*.35;\nfloat rim=pow(1.-max(dot(n,V),0.),3.)*.35;vec3 sky=mix(vec3(.30,.27,.24),vec3(1.,.93,.82),n.y*.5+.5);\nvec3 alb=mix(base,st.rgb*(.55+.45*dot(base,vec3(.33))),st.a);vec3 c=alb*(sky*.55+l*.75)+sp+rim*vec3(1.,.8,.55);\nif(vZ==uFlash)c=mix(c,vec3(1.),uPulse*.35);o=vec4(c,1.);}');
+    this.pr = prog(gl, '#version 300 es\nin vec3 aP;in vec3 aN;in vec2 aT;in float aZ;uniform mat4 uVP,uM;out vec3 vN;out vec2 vT;out vec3 vW;flat out int vZ;\nvoid main(){vec4 w=uM*vec4(aP,1.);vW=w.xyz;vN=mat3(uM)*aN;vT=aT;vZ=int(aZ+.5);gl_Position=uVP*w;}', '#version 300 es\nprecision highp float;in vec3 vN;in vec2 vT;in vec3 vW;flat in int vZ;uniform sampler2D uTex;uniform vec4 uCol[20];uniform int uFlash;uniform float uPulse;uniform vec3 uEye;out vec4 o;\nvoid main(){vec3 n=normalize(vN);if(!gl_FrontFacing)n=-n;vec3 base=texture(uTex,vT).rgb;vec4 st=vZ>0&&vZ<20?uCol[vZ]:vec4(0.);\nfloat l=max(dot(n,normalize(vec3(.4,.9,.5))),0.);vec3 V=normalize(uEye-vW);vec3 H=normalize(normalize(vec3(.4,.9,.5))+V);float sp=pow(max(dot(n,H),0.),48.)*.2;\nfloat rim=pow(1.-max(dot(n,V),0.),3.)*.35;vec3 sky=mix(vec3(.30,.27,.24),vec3(1.,.93,.82),n.y*.5+.5);\nvec3 alb=mix(base,st.rgb*(.74+.26*dot(base,vec3(.33))),st.a);vec3 c=alb*(sky*.55+l*.75)+sp+rim*vec3(1.,.8,.55);\nif(vZ==uFlash)c=mix(c,vec3(1.),uPulse*.35);o=vec4(c,1.);}');
     this.pk = prog(gl, '#version 300 es\nin vec3 aP;in float aZ;uniform mat4 uVP,uM;flat out int vZ;void main(){vZ=int(aZ+.5);gl_Position=uVP*uM*vec4(aP,1.);}', '#version 300 es\nprecision highp float;flat in int vZ;out vec4 o;void main(){o=vec4(float(vZ)/255.,0.,0.,1.);}');
     this.fbo = gl.createFramebuffer();
     this.load();
@@ -241,12 +242,37 @@ var car = {
     var uv = new Float32Array(buf.slice(o, o + nv * 8)); o += nv * 8;
     var idx = new Uint16Array(buf.slice(o, o + nt * 6)); o += nt * 6;
     var zone = new Uint8Array(buf.slice(o, o + nv)), nor = new Float32Array(nv * 3);
-    for (var i = 0; i < idx.length; i += 3) {
-      var a = idx[i] * 3, b = idx[i + 1] * 3, c = idx[i + 2] * 3;
-      var ux = pos[b] - pos[a], uy = pos[b + 1] - pos[a + 1], uz = pos[b + 2] - pos[a + 2], vx = pos[c] - pos[a], vy = pos[c + 1] - pos[a + 1], vz = pos[c + 2] - pos[a + 2];
-      var nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
-      [a, b, c].forEach(function (v) { nor[v] += nx; nor[v + 1] += ny; nor[v + 2] += nz; });
+    /* تنعيم (27/11، محمد: «مجسمها مطعوج»): المجسّم مولَّد آلياً وسطوحه متموّجة. نلحم الرؤوس المتطابقة (المكرّرة عند فواصل القطع
+       وحواف النسيج)، ثم نحسب نواظم ملساء لألواح الهيكل (10 دورات). تحريك الرؤوس نفسها (CAR_SMOOTH) معطَّل لأنه يفتح شقوقاً عند فواصل القطع. الزجاج والعجلات والمصابيح لا تُمسّ. */
+    var key = {}, wid = new Uint32Array(nv), wn = 0, i, j, k, a, b, c, it, pass;
+    for (j = 0; j < nv; j++) { k = Math.round(pos[j * 3] * 2e4) + '_' + Math.round(pos[j * 3 + 1] * 2e4) + '_' + Math.round(pos[j * 3 + 2] * 2e4); if (key[k] === undefined) key[k] = wn++; wid[j] = key[k]; }
+    var wp = new Float32Array(wn * 3), free = new Uint8Array(wn).fill(1), nb = new Array(wn);
+    for (j = 0; j < nv; j++) { k = wid[j] * 3; wp[k] = pos[j * 3]; wp[k + 1] = pos[j * 3 + 1]; wp[k + 2] = pos[j * 3 + 2]; if (!zone[j]) free[wid[j]] = 0; }
+    for (j = 0; j < wn; j++) nb[j] = [];
+    for (i = 0; i < idx.length; i += 3) { a = wid[idx[i]]; b = wid[idx[i + 1]]; c = wid[idx[i + 2]]; nb[a].push(b, c); nb[b].push(a, c); nb[c].push(a, b); }
+    var tmp = new Float32Array(wn * 3);
+    function relax(arr, f, onlyFree) {
+      for (var v = 0; v < wn; v++) {
+        var l = nb[v], n = l.length, x = 0, y = 0, z = 0, q;
+        if (!n || (onlyFree && !free[v])) { tmp[v * 3] = arr[v * 3]; tmp[v * 3 + 1] = arr[v * 3 + 1]; tmp[v * 3 + 2] = arr[v * 3 + 2]; continue; }
+        for (q = 0; q < n; q++) { x += arr[l[q] * 3]; y += arr[l[q] * 3 + 1]; z += arr[l[q] * 3 + 2]; }
+        tmp[v * 3] = arr[v * 3] + f * (x / n - arr[v * 3]); tmp[v * 3 + 1] = arr[v * 3 + 1] + f * (y / n - arr[v * 3 + 1]); tmp[v * 3 + 2] = arr[v * 3 + 2] + f * (z / n - arr[v * 3 + 2]);
+      }
+      arr.set(tmp);
     }
+    for (it = 0; it < CAR_SMOOTH; it++) { relax(wp, .5, true); relax(wp, -.53, true); }
+    for (j = 0; j < nv; j++) { k = wid[j] * 3; pos[j * 3] = wp[k]; pos[j * 3 + 1] = wp[k + 1]; pos[j * 3 + 2] = wp[k + 2]; }
+    var wnr = new Float32Array(wn * 3);
+    for (i = 0; i < idx.length; i += 3) {
+      a = wid[idx[i]] * 3; b = wid[idx[i + 1]] * 3; c = wid[idx[i + 2]] * 3;
+      var ux = wp[b] - wp[a], uy = wp[b + 1] - wp[a + 1], uz = wp[b + 2] - wp[a + 2], vx = wp[c] - wp[a], vy = wp[c + 1] - wp[a + 1], vz = wp[c + 2] - wp[a + 2];
+      var nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+      wnr[a] += nx; wnr[a + 1] += ny; wnr[a + 2] += nz; wnr[b] += nx; wnr[b + 1] += ny; wnr[b + 2] += nz; wnr[c] += nx; wnr[c + 1] += ny; wnr[c + 2] += nz;
+    }
+    function unit() { for (var v = 0; v < wn; v++) { var l = Math.hypot(wnr[v * 3], wnr[v * 3 + 1], wnr[v * 3 + 2]) || 1; wnr[v * 3] /= l; wnr[v * 3 + 1] /= l; wnr[v * 3 + 2] /= l; } }
+    unit();
+    for (pass = 0; pass < CAR_NSMOOTH; pass++) { relax(wnr, .6, true); unit(); }
+    for (j = 0; j < nv; j++) { k = wid[j] * 3; nor[j * 3] = wnr[k]; nor[j * 3 + 1] = wnr[k + 1]; nor[j * 3 + 2] = wnr[k + 2]; }
     var fx = 0, fn = 0, fz = names.indexOf('f_bumper') + 1;
     for (var j = 0; j < nv; j++) if (zone[j] === fz) { fx += pos[j * 3]; fn++; }
     return { pos: pos, uv: uv, idx: idx, nor: nor, zf: Float32Array.from(zone), names: names, front: fn ? Math.sign(fx) : 1, n: idx.length };
@@ -388,8 +414,115 @@ function safeSet() { var i = Math.min(lineEls.length - 1, Math.floor(pinProgress
   watch(dl, dlStart, dlStep, 1700, 2600);
 })();
 
+/* مساعد يُسر: رمز القطرة بحركته في التطبيق (نقل معادلات lib/core/widgets/ai_mark.dart: خمسة نوابض)، ومثال يكتبه أمامك */
+(function () {
+  var cv = $('#aiMark'), card = $('#aiCard'); if (!cv || !card) return;
+  var stEl = $('#aiState'), ask = $('#aiAsk'), where = $('#aiWhere'), out = $('#aiOut'), btns = $('.aibtns', card), chips = $$('.aichips li');
+  var DEMO = CFG.ai || [
+    [0, 'وصف فرصة العمل', 'اكتبها لي', 'مطلوب ممرّض عناية مشدّدة بخبرة سنتين على الأقل، للعمل بدوام مسائي في مستشفى خاص وسط حلب. الراتب مذكور في الإعلان، والمواصلات مؤمّنة.'],
+    [1, 'نبذتك في السيرة', 'حسّنها', 'محاسب بخبرة خمس سنوات في الشركات التجارية. أتقن إعداد القوائم المالية والمطابقات البنكية، وأبحث عن فرصة بدوام كامل في دمشق.'],
+    [2, 'وصف إعلان العقار', 'اكتب الوصف', 'شقة مشمسة من ثلاث غرف وصالة في المزة، في الطابق الثالث مع مصعد. إكساء جديد ومطبخ مجهّز، وقريبة من المدارس والأسواق.']
+  ];
+  var TXT = CFG.aiTxt || ['جاهز', 'يكتب لك…', 'تمام، راجِع النص'];
+  var di = 0;
+  function show(i) { var d = DEMO[i]; where.textContent = d[1]; ask.textContent = d[2]; chips.forEach(function (c, j) { c.classList.toggle('on', j === d[0]); }); }
+  if (reduce || !cv.getContext) { show(0); out.textContent = DEMO[0][3]; stEl.textContent = TXT[2]; btns.classList.add('on'); return; }
+  var g = cv.getContext('2d'), orb = cv.parentNode, W = 120, SZ = 78, C = W / 2, dpr = Math.min(3, window.devicePixelRatio || 1);
+  cv.width = cv.height = Math.round(W * dpr);
+  function spring(v, k, z) { return { v: v, t: v, vel: 0, k: k, z: z }; }
+  function stepS(s, dt) { var c = 2 * s.z * Math.sqrt(s.k); s.vel += (s.k * (s.t - s.v) - c * s.vel) * dt; s.v += s.vel * dt; }
+  /* الزاوية الكبيرة أسفل «النهاية»: يسار بالعربية، يمين بالإنجليزية */
+  var base = document.documentElement.dir === 'ltr' ? Math.PI / 4 : 3 * Math.PI / 4, state = 'idle', time = 0, since = 0, fx = 9, last = 0, id = 0, typed = 0;
+  var energy = spring(0, 55, 1), scale = spring(1, 190, .5), glow = spring(.25, 40, 1), tip = spring(.3, 80, .9), ang = spring(base, 90, .85);
+  function apply(s) {
+    var was = state; state = s; since = 0;
+    if (s === 'think') { energy.t = 1; glow.t = .6; tip.t = .12; ang.k = 40; ang.z = 1; return; }
+    energy.t = 0; tip.t = .3; ang.k = 90; ang.z = s === 'done' ? .5 : .9;
+    if (was === 'think') ang.t = base + Math.ceil((ang.v - base) / (2 * Math.PI)) * 2 * Math.PI;
+    if (s === 'done') { scale.vel += 3.4; glow.t = 1; fx = 0; } else glow.t = .25;
+  }
+  function draw() {
+    var e = clamp(energy.v), i, th, d, bump, wob, r, x, y;
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, W);
+    var r0 = SZ * .3 * scale.v * (1 + Math.sin(time * 1.7) * .025 * (1 - e)), ga = .5 * glow.v;
+    if (ga > .01) {
+      var rg = g.createRadialGradient(C, C, 0, C, C, r0 * 1.9);
+      rg.addColorStop(0, 'rgba(61,213,152,' + ga + ')'); rg.addColorStop(.1, 'rgba(61,213,152,' + ga + ')'); rg.addColorStop(1, 'rgba(61,213,152,0)');
+      g.fillStyle = rg; g.beginPath(); g.arc(C, C, r0 * 1.9, 0, 2 * Math.PI); g.fill();
+    }
+    var n = 90, sharp = 1 - e;
+    g.beginPath();
+    for (i = 0; i <= n; i++) {
+      th = i / n * 2 * Math.PI; d = Math.atan2(Math.sin(th - ang.v), Math.cos(th - ang.v));
+      bump = (1 - sharp) * Math.exp(-(d * d) / (2 * .55 * .55)) + sharp * Math.exp(-Math.abs(d) / .3);
+      wob = e * (.075 * Math.sin(2 * th + time * 2.1) + .05 * Math.sin(3 * th - time * 2.9) + .028 * Math.sin(5 * th + time * 1.4));
+      r = r0 * (1 + tip.v * bump + wob); x = C + r * Math.cos(th); y = C + r * Math.sin(th);
+      if (i) g.lineTo(x, y); else g.moveTo(x, y);
+    }
+    g.closePath();
+    var gg = time * (.3 + e * 1.3), vx = Math.cos(gg) * r0 * 1.4, vy = Math.sin(gg) * r0 * 1.4;
+    var lg = g.createLinearGradient(C - vx, C - vy, C + vx, C + vy);
+    lg.addColorStop(0, '#2FC489'); lg.addColorStop(.45, '#8FEBC0'); lg.addColorStop(.8, '#F2FFF8'); lg.addColorStop(1, '#FFE08A');
+    g.fillStyle = lg; g.fill();
+    g.save(); g.clip();
+    var hx = C - r0 * .38, hy = C - r0 * .5, hg = g.createRadialGradient(hx, hy, 0, hx, hy, r0 * 1.05);
+    hg.addColorStop(0, 'rgba(255,255,255,.35)'); hg.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = hg; g.fillRect(0, 0, W, W);
+    if (fx < .9) {
+      var k = fx / .9, sx = C + (-1.7 + k * 3.4) * r0, w = r0 * .38, sg = g.createLinearGradient(sx - w, C - w * .6, sx + w, C + w * .6);
+      sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(.5, 'rgba(255,255,255,' + (.7 * (1 - k * .4)) + ')'); sg.addColorStop(1, 'rgba(255,255,255,0)');
+      g.fillStyle = sg; g.fillRect(0, 0, W, W);
+    }
+    g.restore();
+  }
+  /* الدورة: جاهز 1.7 ثانية (ضغطة على الزر) ← يكتب 2.6 ← النص يُكتب حرفاً حرفاً ثم يبقى 4 ثوانٍ ← المثال التالي */
+  function tick(now) {
+    var dt = Math.min(.05, (now - last) / 1000); last = now;
+    if (dt > 0) {
+      time += dt; since += dt; fx += dt;
+      var full = DEMO[di][3];
+      if (state === 'idle') {
+        ask.classList.toggle('tap', since > 1.2 && since < 1.45);
+        if (since > 1.7) { apply('think'); stEl.textContent = TXT[1]; out.textContent = TXT[1]; out.classList.add('wait'); }
+      } else if (state === 'think' && since > 2.6) { apply('done'); stEl.textContent = TXT[2]; out.classList.remove('wait'); out.textContent = ''; typed = 0; }
+      else if (state === 'done') {
+        var nCh = Math.min(full.length, Math.floor(since * 46));
+        if (nCh !== typed) { typed = nCh; out.textContent = full.slice(0, nCh); if (nCh === full.length) btns.classList.add('on'); }
+        if (since > full.length / 46 + 4) { di = (di + 1) % DEMO.length; show(di); apply('idle'); stEl.textContent = TXT[0]; out.textContent = ''; btns.classList.remove('on'); }
+      }
+      while (dt > 0) {
+        var hh = Math.min(dt, 1 / 120);
+        if (state === 'think') ang.t += 3 * hh;
+        if (state === 'done' && since > .6) glow.t = .3;
+        stepS(energy, hh); stepS(scale, hh); stepS(glow, hh); stepS(tip, hh); stepS(ang, hh);
+        dt -= hh;
+      }
+      draw();
+    }
+    id = requestAnimationFrame(tick);
+  }
+  function go(on) { cancelAnimationFrame(id); id = 0; if (on) { last = performance.now(); id = requestAnimationFrame(tick); } }
+  orb.classList.add('live'); show(0); draw();
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { es.forEach(function (e) { go(e.isIntersecting && !document.hidden); }); }).observe(card); else go(true);
+})();
+
+/* سماء يُسر: الشمس تعبر السماء مع التمرير، واللون يمضي من الفجر إلى الليل */
+var SKY = [[0, [246, 252, 248], [222, 242, 232]], [.4, [247, 252, 248], [226, 244, 234]], [.72, [253, 250, 240], [238, 243, 224]], [1, [240, 249, 244], [214, 238, 226]]];
+var rootStyle = document.documentElement.style;
+function mix3(a, b, t) { return [0, 1, 2].map(function (i) { return Math.round(lerp(a[i], b[i], t)); }); }
+function skySet() {
+  var max = document.documentElement.scrollHeight - window.innerHeight, p = max > 0 ? clamp(window.scrollY / max) : 0, i = 0;
+  while (i < SKY.length - 2 && p > SKY[i + 1][0]) i++;
+  var t = clamp((p - SKY[i][0]) / (SKY[i + 1][0] - SKY[i][0]));
+  rootStyle.setProperty('--sky-a', 'rgb(' + mix3(SKY[i][1], SKY[i + 1][1], t).join(',') + ')');
+  rootStyle.setProperty('--sky-b', 'rgb(' + mix3(SKY[i][2], SKY[i + 1][2], t).join(',') + ')');
+  rootStyle.setProperty('--sun', mix3([246, 205, 96], [240, 168, 92], clamp((p - .55) / .4)).join(','));
+  rootStyle.setProperty('--sx', (84 - 66 * p).toFixed(2) + '%');
+  rootStyle.setProperty('--sy', (15 + 40 * Math.pow(p, 1.15)).toFixed(2) + '%');
+}
+
 /* الشريط العلوي فوق الأقسام الداكنة */
-var bar = $('#bar'), darkEls = $$('.garage,.safe,.end');
+var bar = $('#bar'), darkEls = $$('.end');
 function barSet() {
   var dark = growE > .9 && grow.getBoundingClientRect().bottom > 60;
   if (!dark) for (var i = 0; i < darkEls.length; i++) { var r = darkEls[i].getBoundingClientRect(); if (r.top < 30 && r.bottom > 30) { dark = true; break; } }
@@ -412,7 +545,7 @@ function onScroll() {
   var y = window.scrollY; if (!arcDrag) arcX += (y - lastY) * .35; lastY = y;
   hTarget = clamp((y - hero.offsetTop) / Math.max(1, hero.offsetHeight - window.innerHeight));
   workSet(Math.min(stepEls.length - 1, Math.floor(pinProgress(workPin) * stepEls.length)));
-  growSet(); safeSet(); barSet(); kick();
+  growSet(); safeSet(); barSet(); skySet(); kick();
 }
 var heroBusy = true;
 function kick() { if (!raf) raf = requestAnimationFrame(step); }

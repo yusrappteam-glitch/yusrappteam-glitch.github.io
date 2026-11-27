@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>يُسر — عملك ومسكنك ومركبتك في مكان واحد</title>
 <meta name="description" content="يُسر: وظائف وعقارات ومركبات في تطبيق واحد. راتب واضح قبل أن تتقدّم، وجولة 360 داخل البيت قبل أن تزوره، وتقرير فحص للسيارة قبل أن تراها.">
-<meta name="theme-color" content="#0a0a0a">
+<meta name="theme-color" content="#eef7f2">
 <link rel="icon" type="image/png" href="icon.png">
 <meta property="og:title" content="يُسر — عملك ومسكنك ومركبتك في مكان واحد">
 <meta property="og:description" content="وظائف وعقارات ومركبات في تطبيق واحد.">
@@ -20,10 +20,11 @@
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
+<div class="sky" aria-hidden="true"><div class="sun"><i class="disc"></i><i class="ring"></i><i class="ring r2"></i><i class="ring r3"></i></div><div class="haze"></div></div>
 <header class="bar" id="bar">
   <a href="#top" class="brand" aria-label="يُسر"><img src="wordmark.png" alt="يُسر"></a>
   <nav aria-label="أقسام الصفحة">
-    <a href="#work">العمل</a><a href="#home">المسكن</a><a href="#cars">المركبة</a><a href="#safe">الأمان</a>
+    <a href="#work">العمل</a><a href="#home">المسكن</a><a href="#cars">المركبة</a><a href="#ai">المساعد</a><a href="#stats">الإحصاءات</a><a href="#safe">الأمان</a>
   </nav>
   <a class="get" href="#get">قريباً</a>
 </header>
@@ -157,22 +158,33 @@
   <div class="facts"><div class="rv"><b>من الدراجة إلى الشاحنة</b><span>سيارات ودراجات وشاحنات وآليات زراعية وإنشائية.</span></div><div class="rv"><b>جديد ومستعمل</b><span>من أصحابها ومن المعارض والوكالات، بالدولار أو بالليرة.</span></div><div class="rv"><b>حجز تجربة قيادة</b><span>تختار الموعد، ويصل طلبك إلى المعرض مرتّباً.</span></div></div>
 </section>
 
-<!-- 6 · الأمان -->
-<section class="safe" id="safe">
-  <div class="pin" id="safePin">
-    <div class="stick">
-      <p class="label">الأمان</p>
-      <h2 class="h2">رقمك لك.<br>حتى تقبل.</h2>
-      <ul class="lines" id="lines">
-        <li class="on">أرقامكما مخفية حتى توافقا معاً.</li>
-        <li>لا رسائل قبل قبول الطلب.</li>
-        <li>شارة «موثّق» لمن أثبت هويته.</li>
-        <li>صور تُفحص قبل النشر.</li>
-        <li>إبلاغ بلا كشف هويتك.</li>
-        <li>تقييمات من تجارب حقيقية فقط.</li>
-      </ul>
-    </div>
+<!-- 6 · مساعد يُسر -->
+<section class="chapter ai" id="ai">
+  <div class="intro">
+    <p class="label rv">مساعد يُسر</p>
+    <h2 class="h2 rv">يقترح الصياغة.<br>والقرار لك.</h2>
+    <p class="lead rv">مساعد بالذكاء الاصطناعي داخل التطبيق: يكتب معك وصف فرصتك أو نبذتك أو إعلان عقارك، وأنت تراجع وتعدّل قبل النشر.</p>
+    <p class="soon rv">يصل بعد الإطلاق · حيث تتوفر الخدمة</p>
   </div>
+  <div class="aicard rv" id="aiCard" aria-label="مثال على عمل المساعد">
+    <div class="aihead">
+      <span class="aiorb"><canvas id="aiMark" aria-hidden="true"></canvas><svg class="aimark" viewBox="10 10 80 80" aria-hidden="true"><defs><linearGradient id="aiG" gradientUnits="userSpaceOnUse" x1="79.7" y1="20.3" x2="20.3" y2="79.7"><stop offset="0" stop-color="#2FC489"/><stop offset=".45" stop-color="#8FEBC0"/><stop offset=".8" stop-color="#F2FFF8"/><stop offset="1" stop-color="#FFE08A"/></linearGradient></defs><path d="M80.0 50.0 80.0 51.6 79.8 53.1 79.6 54.7 79.4 56.2 79.0 57.8 78.5 59.3 78.0 60.8 77.4 62.2 76.7 63.6 76.0 65.0 75.2 66.4 74.3 67.7 73.3 68.9 72.3 70.1 71.2 71.2 70.1 72.3 68.9 73.4 67.7 74.3 66.4 75.2 65.1 76.1 63.7 76.9 62.3 77.6 60.8 78.2 59.3 78.8 57.8 79.2 56.3 79.7 54.8 80.0 53.2 80.3 51.6 80.5 50.0 80.7 48.4 80.7 46.8 80.8 45.1 80.7 43.5 80.6 41.8 80.5 40.2 80.3 38.5 80.1 36.7 79.8 34.9 79.5 33.1 79.2 31.2 78.9 29.2 78.6 27.1 78.2 24.9 77.9 22.4 77.6 22.1 75.1 21.8 72.9 21.4 70.8 21.1 68.8 20.8 66.9 20.5 65.1 20.2 63.3 19.9 61.5 19.7 59.8 19.5 58.2 19.4 56.5 19.3 54.9 19.2 53.2 19.3 51.6 19.3 50.0 19.5 48.4 19.7 46.8 20.0 45.2 20.3 43.7 20.8 42.2 21.2 40.7 21.8 39.2 22.4 37.7 23.1 36.3 23.9 34.9 24.8 33.6 25.7 32.3 26.6 31.1 27.7 29.9 28.8 28.8 29.9 27.7 31.1 26.7 32.3 25.7 33.6 24.8 35.0 24.0 36.4 23.3 37.8 22.6 39.2 22.0 40.7 21.5 42.2 21.0 43.8 20.6 45.3 20.4 46.9 20.2 48.4 20.0 50.0 20.0 51.6 20.0 53.1 20.2 54.7 20.4 56.2 20.7 57.8 21.0 59.3 21.5 60.8 22.0 62.2 22.6 63.6 23.3 65.0 24.0 66.3 24.8 67.6 25.7 68.9 26.7 70.1 27.7 71.2 28.8 72.3 29.9 73.3 31.1 74.3 32.4 75.2 33.7 76.0 35.0 76.7 36.4 77.4 37.8 78.0 39.2 78.5 40.7 79.0 42.2 79.3 43.8 79.6 45.3 79.8 46.9 80.0 48.4Z" fill="url(#aiG)"/></svg></span>
+      <div><b>مساعد يُسر</b><small id="aiState">جاهز</small></div>
+      <span class="aiask" id="aiAsk">اكتبها لي</span>
+    </div>
+    <p class="aiwhere" id="aiWhere">وصف فرصة العمل</p>
+    <p class="aiout" id="aiOut"></p>
+    <div class="aibtns"><span class="use">استعمل</span><span>صياغة أخرى</span><span>إلغاء</span></div>
+  </div>
+  <ul class="aichips rv" aria-label="ما يساعدك فيه">
+    <li>وصف فرصة العمل</li><li>نبذتك في السيرة</li><li>وصف إعلان العقار</li><li>سيرتك بالإنجليزية</li><li>هل سيرتي مناسبة؟</li><li>لخّص المتقدمين</li>
+  </ul>
+  <div class="facts light rv">
+    <div><b>يقترح، وأنت تقرّر</b><span>لا يُنشر شيء قبل أن تراجعه وتضغط «استعمل».</span></div>
+    <div><b>في مكانه</b><span>زر صغير حيث تكتب: في نموذج الفرصة، ومنشئ السيرة، وإعلان العقار.</span></div>
+    <div><b>للفرص والعقارات</b><span>يساعدك في ما يخصّ إعلانك وسيرتك، لا أكثر.</span></div>
+  </div>
+  <p class="note">النصوص في البطاقة أمثلة توضيحية.</p>
 </section>
 
 <!-- 7 · الإحصاءات -->
@@ -218,7 +230,25 @@
   <div class="facts light"><div class="rv"><b>لفرصة العمل أيضاً</b><span>يرى صاحب العمل عدد المشاهدات والمتقدّمين لكل فرصة.</span></div><div class="rv"><b>رواتب السوق</b><span>الراتب المعتاد لكل مهنة، من فرص يُسر في آخر ستة أشهر.</span></div><div class="rv"><b>تقرير سوق المركبات</b><span>أسعار المستعمل لكل ماركة، من الإعلانات المنشورة.</span></div><div class="rv"><b>عدٌّ منصف</b><span>مشاهدة واحدة للشخص في اليوم، ولا تُحسب مشاهداتك أنت.</span></div><div class="rv"><b>أرقام لا أسماء</b><span>تعرف كم شخصاً شاهد إعلانك، لا من هم.</span></div><div class="rv"><b>أرقام حقيقية فقط</b><span>حين لا تكفي الإعلانات لحساب رقم، لا يُعرض رقم.</span></div></div>
 </section>
 
-<!-- 7 · لمن -->
+<!-- 8 · الأمان -->
+<section class="safe" id="safe">
+  <div class="pin" id="safePin">
+    <div class="stick">
+      <p class="label">الأمان</p>
+      <h2 class="h2">رقمك لك.<br>حتى تقبل.</h2>
+      <ul class="lines" id="lines">
+        <li class="on">أرقامكما مخفية حتى توافقا معاً.</li>
+        <li>لا رسائل قبل قبول الطلب.</li>
+        <li>شارة «موثّق» لمن أثبت هويته.</li>
+        <li>صور تُفحص قبل النشر.</li>
+        <li>إبلاغ بلا كشف هويتك.</li>
+        <li>تقييمات من تجارب حقيقية فقط.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · لمن -->
 <section class="who" id="who">
   <div class="intro">
     <h2 class="h2 rv">لكل من يبحث.<br>ولكل من يعرض.</h2>
@@ -233,7 +263,7 @@
   </div>
 </section>
 
-<!-- 8 · سماء يُسر -->
+<!-- 10 · سماء يُسر -->
 <section class="skyy" id="sky">
   <div class="intro">
     <p class="label rv">سماء يُسر</p>
@@ -247,7 +277,7 @@
   </div>
 </section>
 
-<!-- 8 · أسئلة -->
+<!-- 11 · أسئلة -->
 <section class="faq" id="faq">
   <h2 class="h2 rv">أسئلة تتكرر.</h2>
   <div class="qa">
@@ -259,7 +289,7 @@
   </div>
 </section>
 
-<!-- 9 · الخاتمة -->
+<!-- 12 · الخاتمة -->
 <section class="end" id="get">
   <div class="beam" aria-hidden="true"></div>
   <p class="word" aria-hidden="true">يُسر</p>
