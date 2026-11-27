@@ -1,45 +1,281 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>يُسر · Yusr</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="logo.png">
-<style>
-:root{--bg:#F6F8F7;--card:#FFFFFF;--ink:#14201B;--ink2:#4A5952;--ink3:#7F8C87;--brand:#0B7D5E;--soft:#E0F1E9;--line:#E3E8E6}
-@media (prefers-color-scheme:dark){:root{--bg:#0E1412;--card:#18201D;--ink:#EEF3F1;--ink2:#A5B4AE;--ink3:#7D8B86;--brand:#3DD598;--soft:#163328;--line:#26302C}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.85 "IBM Plex Sans Arabic","Segoe UI",Tahoma,Arial,sans-serif}
-.wrap{max-width:760px;margin:0 auto;padding:20px 16px 60px}
-header{display:flex;align-items:center;gap:12px;padding:8px 0 18px}
-header img{width:44px;height:44px;border-radius:12px}
-header .name{font-weight:700;font-size:20px}
-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-nav a{padding:6px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--ink2);text-decoration:none;font-size:14px}
-nav a.on{background:var(--soft);color:var(--brand);border-color:transparent;font-weight:700}
-.doc{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px 20px;margin-bottom:18px}
-h1{font-size:24px;line-height:1.4;margin:0 0 8px}
-h2{font-size:17px;margin:22px 0 4px;color:var(--brand)}
-p{margin:6px 0;color:var(--ink2)}
-ul{margin:6px 0;padding-inline-start:22px;color:var(--ink2)}
-li{margin:4px 0}
-a{color:var(--brand)}
-.lead{color:var(--ink)}
-.en{font-family:"IBM Plex Sans","Segoe UI",Arial,sans-serif}
-.steps li{margin:8px 0}
-footer{color:var(--ink3);font-size:13px;text-align:center;margin-top:24px}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>يُسر — عملك ومسكنك ومركبتك في مكان واحد</title>
+<meta name="description" content="يُسر: وظائف وعقارات ومركبات في تطبيق واحد. راتب واضح قبل أن تتقدّم، وجولة 360 داخل البيت قبل أن تزوره، وتقرير فحص للسيارة قبل أن تراها.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/png" href="icon.png">
+<meta property="og:title" content="يُسر — عملك ومسكنك ومركبتك في مكان واحد">
+<meta property="og:description" content="وظائف وعقارات ومركبات في تطبيق واحد.">
+<meta property="og:type" content="website">
+<!--
+  Yusr website v4 (27/11). Motion patterns follow designer components from 21st.dev, rebuilt in plain CSS/JS:
+  - Hero: "Phone Scroll Hero" by Ruixen UI (MIT) — a tilted phone that flattens and climbs over the headline.
+  - Screens strip: the curved filmstrip pattern ("images curve in from one edge, flatten at the centre, fade away").
+  - Home: scroll-to-scale media. Vehicle: giant type around the media. Safety: scroll-highlighted word list.
+  Screens are real app screenshots. The 360 viewer and the 3D car are the app's own shader and model.
+-->
+<link rel="stylesheet" href="site.css">
 </head>
-<body><div class="wrap">
-<header><img src="logo.png" alt=""><div class="name">يُسر · Yusr</div></header>
-<nav><a href="index.html" class="on">يُسر · Yusr</a><a href="privacy.html" class="">سياسة الخصوصية · Privacy</a><a href="delete-account.html" class="">حذف الحساب · Delete account</a></nav>
-<section class="doc" lang="ar" dir="rtl"><h1>يُسر</h1><p class="lead">فرص عمل وعقارات في مكان واحد.</p>
-<ul><li><a href="privacy.html">سياسة الخصوصية</a></li><li><a href="delete-account.html">حذف الحساب</a></li></ul>
-<p>للتواصل: <a href="mailto:yusrsupport@gmail.com">yusrsupport@gmail.com</a></p></section>
-<section class="doc en" lang="en" dir="ltr"><h1>Yusr</h1><p class="lead">Jobs and real estate in one place.</p>
-<ul><li><a href="privacy.html">Privacy policy</a></li><li><a href="delete-account.html">Delete account</a></li></ul>
-<p>Contact: <a href="mailto:yusrsupport@gmail.com">yusrsupport@gmail.com</a></p></section>
-<footer>yusrsupport@gmail.com</footer>
-</div></body></html>
+<body>
+<header class="bar" id="bar">
+  <a href="#top" class="brand" aria-label="يُسر"><img src="wordmark.png" alt="يُسر"></a>
+  <nav aria-label="أقسام الصفحة">
+    <a href="#work">العمل</a><a href="#home">المسكن</a><a href="#cars">المركبة</a><a href="#safe">الأمان</a>
+  </nav>
+  <a class="get" href="#get">قريباً</a>
+</header>
+
+<main id="top">
+<!-- 1 · الافتتاحية -->
+<section class="hero" id="hero" aria-label="الافتتاحية">
+  <div class="stage">
+    <div class="title" id="title">
+      <p class="eyebrow">وظائف · عقارات · مركبات</p>
+      <h1>عملك ومسكنك ومركبتك<span>في مكان واحد</span></h1>
+    </div>
+    <div class="rig" id="rig">
+      <div class="phone">
+        <span class="btn b1" aria-hidden="true"></span><span class="btn b2" aria-hidden="true"></span><span class="btn b3" aria-hidden="true"></span>
+        <div class="body"><div class="screen" id="heroScreen">
+          <div class="island" aria-hidden="true"></div>
+          <!--HERO_SHOTS-->
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · شريط الشاشات -->
+<section class="focus" id="focus" aria-label="شاشات التطبيق">
+  <h2 class="h2 rv">كل شاشة،<br>كما هي.</h2>
+  <p class="lead rv">حساب واحد للوظائف والعقارات والمركبات. لكلّ عالم شاشاته وقواعده، ولا يختلط بعضها ببعض.</p>
+  <div class="arc" id="arc" dir="ltr" aria-hidden="true"></div>
+</section>
+
+<!-- 3 · العمل -->
+<section class="chapter" id="work">
+  <div class="intro">
+    <p class="label rv">العمل</p>
+    <h2 class="h2 rv">راتب واضح.<br>قبل أن تتقدّم.</h2>
+    <p class="lead rv">فرص تناسب مهنتك، بتفاصيلها كاملة: الراتب، والدوام، والمكان.</p>
+  </div>
+  <figure class="photo rv"><img src="p/work.webp" alt="شابة أنيقة تتابع طلب التوظيف على هاتفها" loading="lazy"></figure>
+  <div class="pin" id="workPin">
+    <div class="stick">
+      <div class="steps" id="steps">
+        <div class="step on"><b>ابحث في مجالك</b><span>الطب والهندسة والتعليم والمطاعم وغيرها، وفي النطاق القريب منك.</span></div>
+        <div class="step"><b>اعرف كل شيء أولاً</b><span>الدوام وأيامه وموقع العمل على الخريطة، في صفحة واحدة.</span></div>
+        <div class="step"><b>سيرة ذاتية تليق بك</b><span>قوالب أنيقة تملؤها مرة واحدة، وتصدّرها ملف PDF.</span></div>
+        <div class="step"><b>تابع طلبك خطوةً خطوة</b><span>من «تم الإرسال» إلى «القرار»، وتعرف متى شوهد طلبك.</span></div>
+      </div>
+      <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+      <div class="phone flat">
+        <div class="body"><div class="screen" id="workScreen">
+          <div class="island" aria-hidden="true"></div>
+          <img class="on" src="s/search.webp" alt="شاشة البحث عن فرصة" loading="lazy">
+          <img src="s/job2.webp" alt="تفاصيل فرصة العمل" loading="lazy">
+          <img src="s/cv.webp" alt="السيرة الذاتية في التطبيق" loading="lazy">
+          <img src="s/job.webp" alt="حالة طلب التوظيف" loading="lazy">
+        </div></div>
+      </div>
+    </div>
+  </div>
+  <div class="more">
+    <h3 class="h3 rv">للباحث عن عمل</h3>
+    <div class="tiles">
+      <article class="tile rv"><div class="shot"><img src="s/home.webp" alt="الشاشة الرئيسية للباحث عن عمل" loading="lazy"></div><h3>الفرصة التي تشبهك</h3><p>يعرف يُسر مهنتك ومستواك، فيقترح ما يليق بك، ولا يعرض على الطبيب عمل ممرّض.</p></article>
+      <article class="tile rv"><div class="shot"><img src="s/jobs_list.webp" alt="فرص قريبة" loading="lazy"></div><h3>قريب منك</h3><p>نطاق 1 أو 3 أو 10 كم من موقعك. موقعك لا يُخزَّن ولا يُشارَك.</p></article>
+      <article class="tile rv"><div class="shot"><img src="s/job2.webp" alt="تفاصيل الفرصة" loading="lazy"></div><h3>كل التفاصيل في صفحة واحدة</h3><p>راتب شهري أو أجر يومي، والدوام والمكان، وتقييمات من عملوا هناك فعلاً.</p></article>
+      <article class="tile rv"><div class="shot"><img src="s/apps.webp" alt="طلباتي" loading="lazy"></div><h3>تعرف أين وصل كل طلب</h3><p>من «تم الإرسال» إلى «القرار»، ثم محادثة مع صاحب العمل داخل التطبيق.</p></article>
+    </div>
+    <h3 class="h3 rv">ولصاحب العمل</h3>
+    <div class="tiles two">
+      <article class="tile rv"><div class="shot"><img src="s/applicant.webp" alt="طلب توظيف عند صاحب العمل" loading="lazy"></div><h3>راجع المتقدّمين واحداً واحداً</h3><p>تعرف من راجعت ومن ينتظر، وتدعو إلى مقابلة بموعد ومكان واضحين.</p></article>
+      <article class="tile rv"><div class="shot"><img src="s/jobemp.webp" alt="فرصتك عند صاحب العمل" loading="lazy"></div><h3>فرصتك وإحصاءاتها</h3><p>من شاهدها ومن تقدّم، يوماً بيوم.</p></article>
+    </div>
+    <div class="facts light"><div class="rv"><b>قائمة مختصرة</b><span>نجمة لمن يستحق، وملاحظات خاصة لا يراها غيرك.</span></div><div class="rv"><b>أجر يومي أو شهري</b><span>وللعمالة اليومية مجالها الخاص.</span></div><div class="rv"><b>فرص من مواقع رسمية</b><span>تنشرها إدارة يُسر، والتقديم من موقع الجهة نفسها.</span></div></div>
+  </div>
+</section>
+
+<!-- 4 · المسكن -->
+<section class="chapter" id="home">
+  <div class="grow" id="grow">
+    <div class="stick">
+      <div class="intro" id="growTitle">
+        <p class="label">المسكن</p>
+        <h2 class="h2">ادخل البيت.<br>قبل أن تزوره.</h2>
+        <p class="lead">جولة 360 داخل البيت، غرفةً غرفة.</p>
+      </div>
+      <div class="frame" id="frame">
+        <canvas id="pano" aria-label="جولة 360 داخل بيت: اسحب لتنظر حولك"></canvas>
+        <div class="tour-ui" id="tourUi">
+          <span class="deg" aria-hidden="true">360°</span>
+          <div class="rooms" id="rooms"></div>
+          <p class="hint">اسحب لتنظر حولك · صور 360 توضيحية</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tiles">
+    <article class="tile rv"><div class="shot"><img src="s/listing.webp" alt="صفحة عقار في التطبيق" loading="lazy"></div><h3>بيوت تُعرض كما هي</h3><p>صور كبيرة، وشارات واضحة، ومعلومات كاملة قبل أن تسأل.</p></article>
+    <article class="tile rv"><div class="shot"><img src="s/tourhub.webp" alt="تصوير جولة البيت" loading="lazy"></div><h3>صوّر جولة بيتك بهاتفك</h3><p>غرفةً غرفة، بأي ترتيب، ويرشدك التطبيق لقطةً لقطة.</p></article>
+    <article class="tile rv"><div class="shot"><img src="s/project.webp" alt="صفحة مشروع عقاري" loading="lazy"></div><h3>مشروع كامل قبل أن يكتمل بناؤه</h3><p>النماذج والأسعار وموعد التسليم، في صفحة المطوّر.</p></article>
+    <article class="tile rv"><div class="shot"><img src="s/units.webp" alt="لوحة توافر الوحدات" loading="lazy"></div><h3>طابقاً طابقاً</h3><p>المتاح والمحجوز والمُباع، وتطلب وحدة بعينها.</p></article>
+  </div>
+  <div class="more">
+    <h3 class="h3 rv">السعر بينك وبين المالك</h3>
+    <p class="lead rv">تكتب في طلب الاهتمام السعر الذي يناسبك. يصل إلى صاحب الإعلان وحده، ولا يراه أحد غيره. لا مزايدة ولا مزاد.</p>
+    <div class="offer rv" aria-hidden="true"><div><small>السعر المعلن</small><b>95,000 $</b></div><div class="mine"><small>سعرك · يراه المالك وحده</small><b>88,000 $</b></div></div>
+    <div class="facts light"><div class="rv"><b>طلب اهتمام</b><span>سعرك فقط، بلا أرقام ولا روابط.</span></div><div class="rv"><b>قبولٌ ثم محادثة</b><span>لا رسائل قبل أن يقبل صاحب الإعلان طلبك.</span></div><div class="rv"><b>الأرقام بموافقة الطرفين</b><span>يظهر رقم كلٍّ منكما للآخر حين توافقان معاً.</span></div></div>
+    <h3 class="h3 rv">صوّر جولة بيتك بهاتفك</h3>
+    <div class="facts light"><div class="rv"><b>قف في وسط الغرفة</b><span>حلقات من ضوء تدلّك على اللقطة التالية.</span></div><div class="rv"><b>الهاتف يركّب الغرفة بنفسه</b><span>تُجمع اللقطات داخل الهاتف حتى تصير الغرفة كرةً تتجوّل فيها.</span></div><div class="rv"><b>نهار وغروب وليل</b><span>صوّر الغرفة في أكثر من وقت، ويبدّل الزائر بينها.</span></div><div class="rv"><b>موّه ما لا تريد إظهاره</b><span>صورة عائلية أو شاشة: حدّدها فتُغطّى بشعار يُسر.</span></div><div class="rv"><b>اربط الغرف بأبوابها</b><span>ينتقل الزائر من غرفة إلى غرفة كأنه يمشي.</span></div><div class="rv"><b>شارة يُسر 360</b><span>تظهر على إعلانك حين تكتمل الجولة.</span></div></div>
+    <h3 class="h3 rv">وللمطوّر العقاري</h3>
+    <div class="facts light"><div class="rv"><b>صفحة بهويتك</b><span>مشاريعك كلها، بشعارك وترخيصك.</span></div><div class="rv"><b>خطة دفع يحسبها المشتري</b><span>الدفعة الأولى وعدد الأشهر والقسط الشهري.</span></div><div class="rv"><b>رمز QR لكل مشروع</b><span>ملصق يفتح صفحة المشروع من أيّ لافتة.</span></div></div>
+  </div>
+</section>
+
+<!-- 5 · المركبة -->
+<section class="garage" id="cars">
+  <p class="label rv">المركبة</p>
+  <div class="sand">
+    <span class="big top" aria-hidden="true">اعرف حالها</span>
+    <div class="stage3d"><div class="floor" aria-hidden="true"></div><canvas id="car" aria-label="مجسّم سيارة ثلاثي الأبعاد: المس قطعة لتلوّنها"></canvas></div>
+    <span class="big bot" aria-hidden="true">قبل أن تراها</span>
+  </div>
+  <h2 class="sr">اعرف حالها قبل أن تراها</h2>
+  <p class="lead rv">تقرير فحص يلوّن السيارة قطعةً قطعة. جرّبه: اختر حالة، ثم المس قطعة.</p>
+  <div class="states" id="states" role="group" aria-label="حالة القطعة"></div>
+  <p class="sum" id="carSum" aria-live="polite"></p>
+  <div class="tiles">
+    <article class="tile rv"><div class="shot"><img src="s/vehicle.webp" alt="إعلان مركبة" loading="lazy"></div><h3>إعلان يكفي عن السؤال</h3><p>المواصفات كاملة، وحالة كل قطعة، وحجز تجربة قيادة.</p></article>
+    <article class="tile rv"><div class="shot"><img src="s/postv.webp" alt="إعلان مركبة جديد" loading="lazy"></div><h3>اعرض مركبتك في دقائق</h3><p>اختر النوع واملأ التفاصيل. رقم هاتفك لا يظهر في الإعلان.</p></article>
+    <article class="tile rv"><div class="shot"><img src="s/showroom.webp" alt="الشاشة الرئيسية للمعرض" loading="lazy"></div><h3>معرضك في شاشة واحدة</h3><p>إعلاناتك وفروعك والطلبات الجديدة، من أول نظرة.</p></article>
+  </div>
+  <div class="facts"><div class="rv"><b>من الدراجة إلى الشاحنة</b><span>سيارات ودراجات وشاحنات وآليات زراعية وإنشائية.</span></div><div class="rv"><b>جديد ومستعمل</b><span>من أصحابها ومن المعارض والوكالات، بالدولار أو بالليرة.</span></div><div class="rv"><b>حجز تجربة قيادة</b><span>تختار الموعد، ويصل طلبك إلى المعرض مرتّباً.</span></div></div>
+</section>
+
+<!-- 6 · الأمان -->
+<section class="safe" id="safe">
+  <div class="pin" id="safePin">
+    <div class="stick">
+      <p class="label">الأمان</p>
+      <h2 class="h2">رقمك لك.<br>حتى تقبل.</h2>
+      <ul class="lines" id="lines">
+        <li class="on">أرقامكما مخفية حتى توافقا معاً.</li>
+        <li>لا رسائل قبل قبول الطلب.</li>
+        <li>شارة «موثّق» لمن أثبت هويته.</li>
+        <li>صور تُفحص قبل النشر.</li>
+        <li>إبلاغ بلا كشف هويتك.</li>
+        <li>تقييمات من تجارب حقيقية فقط.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · الإحصاءات -->
+<section class="chapter stats" id="stats">
+  <div class="intro">
+    <p class="label rv">الإحصاءات</p>
+    <h2 class="h2 rv">أرقام تقرّر بها.<br>لا تخمين.</h2>
+    <p class="lead rv">لكل إعلان أرقامه: من شاهده، وكم طلباً جاءه. وللسوق كله خرائط وتقارير تُبنى من إعلانات يُسر نفسها.</p>
+  </div>
+  <div class="lives" id="lives" tabindex="0" aria-label="أمثلة حيّة لشاشات الإحصاءات">
+    <article class="live" data-live="ad">
+      <header>
+        <small>إحصائيات الإعلان</small>
+        <h3 data-k="title">شقة للبيع · المزة</h3>
+        <p>المشاهدات في آخر 7 أيام</p>
+        <b class="num" data-k="views">0</b>
+        <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="days" aria-hidden="true"><span>س</span><span>ح</span><span>ن</span><span>ث</span><span>ر</span><span>خ</span><span>اليوم</span></div>
+      </header>
+      <div class="kpis"><div><b data-k="today">0</b><span>اليوم</span></div><div><b data-k="req">0</b><span>الطلبات</span></div><div><b data-k="rate">0%</b><span>نسبة الطلب</span></div></div>
+    </article>
+    <article class="live" data-live="demand">
+      <header>
+        <small>خريطة الطلب</small>
+        <h3>أين يبحث الناس؟</h3>
+        <p>عدد الباحثين عن عقار في كل محافظة</p>
+        <div class="chips" aria-hidden="true"><span class="on" data-m="0">شراء</span><span data-m="1">إيجار</span></div>
+      </header>
+      <ul class="rows" data-k="rows"></ul>
+    </article>
+    <article class="live" data-live="dealer">
+      <header>
+        <small>إحصاءات معرضي</small>
+        <h3>مشاهدات إعلاناتك</h3>
+        <p>في آخر 7 أيام</p>
+        <b class="num" data-k="total">0</b>
+        <svg class="spark" viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path data-k="area" d=""/><path data-k="line" d=""/></svg>
+      </header>
+      <ul class="top" data-k="top"></ul>
+    </article>
+  </div>
+  <p class="note">الأرقام في هذه البطاقات أمثلة توضيحية، تُريك شكل الإحصاءات في التطبيق.</p>
+  <div class="facts light"><div class="rv"><b>لفرصة العمل أيضاً</b><span>يرى صاحب العمل عدد المشاهدات والمتقدّمين لكل فرصة.</span></div><div class="rv"><b>رواتب السوق</b><span>الراتب المعتاد لكل مهنة، من فرص يُسر في آخر ستة أشهر.</span></div><div class="rv"><b>تقرير سوق المركبات</b><span>أسعار المستعمل لكل ماركة، من الإعلانات المنشورة.</span></div><div class="rv"><b>عدٌّ منصف</b><span>مشاهدة واحدة للشخص في اليوم، ولا تُحسب مشاهداتك أنت.</span></div><div class="rv"><b>أرقام لا أسماء</b><span>تعرف كم شخصاً شاهد إعلانك، لا من هم.</span></div><div class="rv"><b>أرقام حقيقية فقط</b><span>حين لا تكفي الإعلانات لحساب رقم، لا يُعرض رقم.</span></div></div>
+</section>
+
+<!-- 7 · لمن -->
+<section class="who" id="who">
+  <div class="intro">
+    <h2 class="h2 rv">لكل من يبحث.<br>ولكل من يعرض.</h2>
+  </div>
+  <div class="row" id="whoRow" tabindex="0" aria-label="لمن يُسر">
+    <figure class="p"><img src="p/who_seeker.webp" alt="" loading="lazy"><b>باحث عن عمل</b></figure>
+    <figure class="p"><img src="p/who_employer.webp" alt="" loading="lazy"><b>صاحب عمل</b></figure>
+    <figure class="p"><img src="p/who_owner.webp" alt="" loading="lazy"><b>مالك</b></figure>
+    <figure class="p"><img src="p/who_agent.webp" alt="" loading="lazy"><b>مكتب عقاري</b></figure>
+    <figure class="p"><img src="p/who_dealer.webp" alt="" loading="lazy"><b>معرض ووكالة</b></figure>
+    <figure class="p"><img src="p/who_developer.webp" alt="" loading="lazy"><b>مطوّر عقاري</b></figure>
+  </div>
+</section>
+
+<!-- 8 · سماء يُسر -->
+<section class="skyy" id="sky">
+  <div class="intro">
+    <p class="label rv">سماء يُسر</p>
+    <h2 class="h2 rv">يتبدّل مع<br>ساعات يومك.</h2>
+    <p class="lead rv">سماء الشاشة الرئيسية تتبع ساعتك: شمس النهار، وقمر الليل. ومعها الوضع الداكن، وبالعربية والإنجليزية.</p>
+  </div>
+  <div class="row" tabindex="0" aria-label="ألوان التطبيق في ساعات اليوم">
+    <figure class="ph"><img src="s/sky_noon.webp" alt="" loading="lazy"><figcaption>النهار</figcaption></figure>
+    <figure class="ph"><img src="s/sky_night.webp" alt="" loading="lazy"><figcaption>الليل</figcaption></figure>
+    <figure class="ph"><img src="s/dark_home.webp" alt="" loading="lazy"><figcaption>الوضع الداكن</figcaption></figure>
+  </div>
+</section>
+
+<!-- 8 · أسئلة -->
+<section class="faq" id="faq">
+  <h2 class="h2 rv">أسئلة تتكرر.</h2>
+  <div class="qa">
+    <details><summary>هل التطبيق مجاني؟</summary><p>نعم. البحث والتقديم والنشر مجانية، ولا رسوم على إعلانات العقارات.</p></details>
+    <details><summary>متى يرى الطرف الآخر رقمي؟</summary><p>حين توافقان كلاكما على مشاركة الأرقام، بعد قبول الطلب. قبل ذلك تبقى الأرقام مخفية.</p></details>
+    <details><summary>هل أحتاج إلى كاميرا خاصة لجولة 360؟</summary><p>لا، هاتفك يكفي. يرشدك التطبيق لقطةً لقطة، ثم يركّب الغرفة بنفسه.</p></details>
+    <details><summary>كيف ينضمّ المطوّر العقاري أو الوكالة؟</summary><p>بحساب من النوع المناسب وطلب توثيق من داخل التطبيق، ثم صفحة بهويتك تديرها بنفسك.</p></details>
+    <details><summary>هل أستطيع استخدامه بالإنجليزية؟</summary><p>نعم. يفتح التطبيق بلغة هاتفك، وتستطيع تغييرها من الإعدادات متى شئت.</p></details>
+  </div>
+</section>
+
+<!-- 9 · الخاتمة -->
+<section class="end" id="get">
+  <div class="beam" aria-hidden="true"></div>
+  <p class="word" aria-hidden="true">يُسر</p>
+  <h2 class="h2">يُسرك أقرب مما تظن.</h2>
+  <p class="from">يبدأ من سوريا، ويتّسع للعرب جميعاً.</p>
+  <div class="stores">
+    <span class="store"><small>قريباً على</small>App Store</span>
+    <span class="store"><small>قريباً على</small>Google Play</span>
+  </div>
+  <footer>
+    <nav aria-label="روابط"><a href="privacy.html">سياسة الخصوصية</a><a href="delete-account.html">حذف الحساب</a><a href="mailto:yusrsupport@gmail.com">تواصل معنا</a></nav>
+    <p>© 2026 يُسر · Yusr. الشاشات من التطبيق نفسه. صور الأشخاص والبيوت توضيحية، مولّدة بالذكاء الاصطناعي.</p>
+  </footer>
+</section>
+</main>
+
+<script src="site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+@font-face{font-family:"Alexandria";src:url("Alexandria.woff") format("woff");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Plex";src:url("IBMPlexSansArabic-Regular.woff") format("woff");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex";src:url("IBMPlexSansArabic-SemiBold.woff") format("woff");font-weight:600;font-display:swap}
+:root{--bg:#fff;--fg:#0a0a0a;--muted:#6b6b6b;--border:#e5e5e5;--frame:#f5f5f5;--soft:#f5f5f7;--brand:#129270;--deep:#0b3b2e;--gold:#e9b949;--vh:100vh}
+@supports (height:100svh){:root{--vh:100svh}}
+@media (prefers-color-scheme:dark){:root{--bg:#0a0a0a;--fg:#fafafa;--muted:#a3a3a3;--border:#262626;--frame:#171717;--soft:#141414}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Plex",system-ui,sans-serif;line-height:1.8}
+body{overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+
+/* الشريط العلوي */
+.bar{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:12px 18px;background:color-mix(in srgb,var(--bg) 76%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);transition:background .4s,color .4s}
+.bar .brand img{height:26px}
+@media (prefers-color-scheme:dark){.bar .brand img{filter:brightness(0) invert(1)}}
+.bar nav{display:none;gap:1.6rem;font-size:.86rem;color:var(--muted)}
+.bar nav a{text-decoration:none}.bar nav a:hover{color:var(--fg)}
+@media (min-width:820px){.bar nav{display:flex}.bar{padding:14px 32px}}
+.get{font:600 .8rem "Plex";color:#fff;background:var(--brand);border-radius:999px;padding:.45rem 1rem;text-decoration:none;white-space:nowrap}
+.bar.dark{background:color-mix(in srgb,#06120e 70%,transparent);color:#fff}
+.bar.dark .brand img{filter:brightness(0) invert(1)}.bar.dark nav{color:rgba(255,255,255,.7)}
+
+/* طباعة مشتركة */
+.label{margin:0 0 .6rem;font:600 .86rem "Plex";color:var(--brand)}
+.h2{margin:0;font:800 clamp(2.3rem,10.5vw,5.2rem)/1.14 "Alexandria","Plex",sans-serif;letter-spacing:-.01em}
+.lead{margin:1rem auto 0;max-width:30rem;color:var(--muted);font-size:1.02rem}
+@media (min-width:768px){.lead{font-size:1.2rem;max-width:36rem}}
+.intro{padding:0 1.4rem;text-align:center}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* الهاتف */
+.phone{position:relative;margin:0 auto;width:13rem}
+@media (min-width:640px){.phone{width:15rem}}
+@media (min-width:768px){.phone{width:17rem}}
+.btn{position:absolute;width:3px;background:color-mix(in srgb,var(--muted) 30%,transparent)}
+.b1{left:-2px;top:16%;height:1.75rem;border-radius:2px 0 0 2px}
+.b2{left:-2px;top:24%;height:2.75rem;border-radius:2px 0 0 2px}
+.b3{right:-2px;top:22%;height:3.5rem;border-radius:0 2px 2px 0}
+.body{border-radius:2.5rem;border:1px solid var(--border);background:var(--frame);padding:.35rem;box-shadow:0 10px 20px rgba(0,0,0,.18),0 40px 60px -20px rgba(0,0,0,.35)}
+.screen{position:relative;width:100%;aspect-ratio:720/1437;overflow:hidden;border-radius:2.2rem;isolation:isolate;transform:translateZ(0);-webkit-mask-image:-webkit-radial-gradient(#fff,#000);background:var(--bg);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--border) 70%,transparent)}
+.island{position:absolute;left:50%;top:.42rem;z-index:10;height:.95rem;width:3.7rem;transform:translateX(-50%);border-radius:999px;background:#000}
+.screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;opacity:0;transition:opacity .9s ease}
+.screen img.on{opacity:1}
+
+/* 1 · الافتتاحية */
+.hero{position:relative;display:flex;align-items:center;justify-content:center;height:60rem;width:100%;overflow:hidden;padding:.5rem}
+@media (min-width:768px){.hero{height:80rem;padding:2rem}}
+.stage{width:100%;perspective:1200px}
+.title{position:relative;z-index:0;margin:0 auto;max-width:64rem;padding:0 1rem;text-align:center;will-change:transform,opacity}
+.eyebrow{margin:0;font:600 .8rem "Plex";color:var(--muted)}
+h1{margin:.75rem 0 0;font:600 clamp(1.2rem,5.6vw,1.875rem)/1.35 "Alexandria","Plex",sans-serif;white-space:nowrap}
+h1 span{display:block;white-space:nowrap;margin-top:.35rem;font-weight:800;font-size:clamp(2.2rem,12.4vw,3rem);line-height:1.15}
+@media (min-width:768px){h1{font-size:2.25rem}h1 span{font-size:6rem}}
+.rig{position:relative;z-index:10;margin-top:1rem;transform:scale(.94) rotateX(22deg);transform-origin:50% 50%;will-change:transform}
+@media (min-width:768px){.rig{margin-top:-1rem}}
+
+/* 2 · شريط الشاشات */
+.focus{padding:5rem 0 4rem;text-align:center;overflow:hidden}
+.focus .h2,.focus .lead{padding:0 1.4rem}
+.arc{position:relative;height:clamp(21rem,92vw,31rem);margin-top:2.5rem;perspective:1100px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.arc.drag{cursor:grabbing}
+.card{position:absolute;left:50%;top:50%;width:clamp(9.5rem,40vw,14rem);aspect-ratio:9/17;margin:0;border-radius:1.4rem;overflow:hidden;background:var(--frame);box-shadow:0 18px 40px -18px rgba(0,0,0,.45);will-change:transform,opacity;backface-visibility:hidden}
+.card img{width:100%;height:100%;object-fit:cover;object-position:top;pointer-events:none}
+.card{aspect-ratio:720/1437}
+
+/* 3 · العمل */
+.chapter{padding-top:5rem}
+.photo{margin:2.6rem auto 0;width:min(100% - 2.4rem,34rem);border-radius:1.8rem;overflow:hidden;aspect-ratio:4/5;background:var(--soft)}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.pin{position:relative;height:calc(var(--vh)*3.8)}
+.stick{position:sticky;top:0;height:var(--vh);overflow:hidden;display:flex;flex-direction:column;align-items:center}
+#workPin .stick{padding-top:5.4rem}
+.steps{position:relative;width:min(100% - 2.8rem,26rem);height:7.4rem;text-align:center}
+.step{position:absolute;inset:0;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+.step.on{opacity:1;transform:none}
+.step b{display:block;font:800 1.55rem/1.3 "Alexandria","Plex",sans-serif}
+.step span{display:block;margin-top:.45rem;color:var(--muted);font-size:.98rem;line-height:1.7}
+.dots{display:flex;gap:.4rem;margin:.2rem 0 1.1rem}
+.dots i{width:.4rem;height:.4rem;border-radius:99px;background:var(--border);transition:all .4s}
+.dots i.on{width:1.4rem;background:var(--brand)}
+.phone.flat{width:min(62vw,17rem,calc((var(--vh) - 15.5rem)/2.05))}
+@media (min-width:900px){
+  #workPin .stick{flex-direction:row;justify-content:center;gap:6rem;padding-top:3rem}
+  #workPin .steps{width:24rem;height:11rem;text-align:start}
+  .step b{font-size:2.4rem}.step span{font-size:1.15rem}
+  #workPin .dots{position:absolute;inset-inline-start:calc(50% - 21rem);bottom:calc(50% - 8.5rem)}
+  .phone.flat{margin:0;flex:none;width:min(19rem,calc((var(--vh) - 9rem)/2.05))}
+  #workPin .steps{flex:none}
+}
+
+/* 4 · المسكن */
+.grow{position:relative;height:calc(var(--vh)*3)}
+.grow .stick{display:block}
+.grow .intro{position:absolute;inset:5.6rem 0 auto 0;will-change:opacity,transform}
+.frame{position:absolute;left:50%;top:0;overflow:hidden;background:#111;will-change:width,height,transform,border-radius}
+.frame canvas{display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab}
+.tour-ui{position:absolute;inset:auto 0 0 0;padding:1.1rem 1rem 1.4rem;display:flex;flex-direction:column;align-items:center;gap:.6rem;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.55));opacity:0;pointer-events:none;transition:opacity .5s}
+.tour-ui.on{opacity:1;pointer-events:auto}
+.deg{position:absolute;inset-inline-start:1.2rem;bottom:calc(100% - .4rem);font:900 clamp(3.4rem,17vw,9rem)/1 "Alexandria",sans-serif;color:rgba(255,255,255,.92);text-shadow:0 6px 30px rgba(0,0,0,.35);direction:ltr}
+.rooms{display:flex;gap:.5rem}
+.rooms button{font:600 .86rem "Plex";color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:.42rem 1rem;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);cursor:pointer}
+.rooms button.on{background:#fff;color:#111;border-color:#fff}
+.hint{margin:0;font-size:.78rem;color:rgba(255,255,255,.8)}
+.tiles{display:flex;gap:.9rem;margin:4rem 0 0;padding:0 1.2rem 1rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.tiles::-webkit-scrollbar{display:none}
+.tile{flex:0 0 min(78vw,19rem);scroll-snap-align:center}
+@media (min-width:640px){.tiles{display:grid;grid-template-columns:1fr 1fr;width:min(100% - 2.4rem,68rem);margin:4rem auto 0;padding:0;overflow:visible}}
+@media (min-width:1000px){.tiles{grid-template-columns:repeat(4,1fr)}}
+.tile{background:var(--soft);border-radius:1.6rem;padding:1.4rem 1.3rem 1.5rem;overflow:hidden;transition-delay:calc(var(--i,0)*90ms)}
+.tile .shot{height:15rem;margin:-1.4rem -1.3rem 1.2rem;overflow:hidden;display:flex;justify-content:center;padding-top:1.4rem;background:linear-gradient(180deg,color-mix(in srgb,var(--brand) 14%,var(--soft)),var(--soft))}
+.tile .shot img{width:11.5rem;height:auto;align-self:flex-start;border-radius:1.4rem 1.4rem 0 0;box-shadow:0 14px 40px -10px rgba(0,0,0,.35)}
+.tile h3{margin:0;font:800 1.15rem/1.4 "Alexandria","Plex",sans-serif}
+.tile p{margin:.4rem 0 0;color:var(--muted);font-size:.94rem;line-height:1.7}
+
+/* 5 · المركبة */
+.garage{margin-top:6rem;padding:5.5rem 0 4.5rem;text-align:center;color:#fff;background:radial-gradient(120% 80% at 50% 38%,#17775c 0%,#0e5440 42%,#08281f 100%);overflow:hidden}
+.garage .label{color:var(--gold)}
+.sand{position:relative;display:flex;flex-direction:column;align-items:center}
+.big{display:block;font:900 clamp(2.6rem,13.4vw,11rem)/1.08 "Alexandria",sans-serif;white-space:nowrap;letter-spacing:-.02em}
+.big.top{color:#fff}.big.bot{color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.85);position:relative;z-index:3}
+.stage3d{position:relative;z-index:2;width:min(100%,62rem);height:clamp(15rem,64vw,31rem);margin:clamp(-5rem,-10vw,-2.2rem) 0}
+.stage3d canvas{position:relative;display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab}
+.floor{position:absolute;left:12%;right:12%;bottom:15%;height:16%;background:radial-gradient(closest-side,rgba(0,0,0,.5),transparent);filter:blur(6px)}
+.garage .lead{color:rgba(255,255,255,.78);padding:0 1.4rem}
+.states{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin:1.4rem auto 0;padding:0 1rem;max-width:36rem}
+.st{display:inline-flex;align-items:center;gap:.45rem;font:600 .84rem "Plex";color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:.4rem .85rem;cursor:pointer}
+.st i{width:.8rem;height:.8rem;border-radius:50%}
+.st.on{background:#fff;color:#0b3b2e;border-color:#fff}
+.sum{min-height:1.6rem;margin:.9rem 1rem 0;font-size:.86rem;color:rgba(255,255,255,.72)}
+.facts{display:grid;grid-template-columns:1fr;gap:.2rem;width:min(100% - 2.4rem,60rem);margin:3rem auto 0;text-align:start}
+.facts div{padding:1.1rem 0;border-top:1px solid rgba(255,255,255,.18)}
+.facts b{display:block;font:800 1.15rem "Alexandria","Plex",sans-serif}.facts span{color:rgba(255,255,255,.7);font-size:.94rem}
+@media (min-width:768px){.facts{grid-template-columns:repeat(3,1fr);gap:2rem}}
+.garage .photo{margin-top:3rem}
+
+/* 6 · الأمان */
+.safe{background:#06120e;color:#fff}
+.safe .pin{height:calc(var(--vh)*3.4)}
+.safe .stick{justify-content:center;padding:4rem 1.6rem 2rem;text-align:center}
+.safe .label{color:var(--gold)}
+.lines{list-style:none;margin:2.2rem 0 0;padding:0;display:grid;gap:.55rem}
+.lines li{font:600 clamp(1.15rem,5.3vw,2.2rem)/1.5 "Alexandria","Plex",sans-serif;color:rgba(255,255,255,.2);transition:color .45s,transform .45s}
+.lines li.on{color:#fff;transform:scale(1.04)}
+.lines li.on::before{content:"";display:inline-block;width:.5em;height:.5em;margin-inline-end:.5em;border-radius:50%;background:var(--brand);box-shadow:0 0 0 .22em rgba(18,146,112,.25);vertical-align:.08em}
+
+/* 7 · لمن */
+.who{padding:6rem 0 2rem}
+.row{display:flex;gap:.9rem;margin-top:2.6rem;padding:0 1.2rem 1.6rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.row::-webkit-scrollbar{display:none}
+.p{position:relative;margin:0;flex:0 0 min(72vw,19rem);aspect-ratio:3/4;border-radius:1.6rem;overflow:hidden;scroll-snap-align:center;background:var(--soft)}
+.p img{width:100%;height:100%;object-fit:cover}
+.p b{position:absolute;inset:auto 0 0 0;padding:3rem 1.2rem 1.1rem;font:800 1.25rem "Alexandria","Plex",sans-serif;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.72))}
+.p.text{display:flex;align-items:flex-end;background:linear-gradient(160deg,color-mix(in srgb,var(--brand) 22%,var(--soft)),var(--soft))}
+.p.text b{position:static;background:none;color:var(--fg);padding:1.2rem}
+@media (min-width:1100px){.row{justify-content:center;overflow:visible}.p{flex:1 1 0;max-width:15rem}.p b{font-size:1.05rem}}
+
+/* 8 · أسئلة */
+.faq{padding:5rem 1.4rem 6rem;max-width:46rem;margin:0 auto}
+.faq .h2{text-align:center}
+.qa{margin-top:2.4rem;border-top:1px solid var(--border)}
+details{border-bottom:1px solid var(--border)}
+summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.15rem 0;font:600 1.06rem "Plex";cursor:pointer}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:400 1.5rem/1 "Plex";color:var(--muted);transition:transform .3s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 1.2rem;color:var(--muted)}
+
+/* 9 · الخاتمة */
+.end{position:relative;min-height:var(--vh);padding:6rem 1.4rem 2rem;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;color:#fff;background:radial-gradient(90% 55% at 50% 100%,#14806375 0%,transparent 70%),linear-gradient(180deg,#040807,#07140f 60%,#0b2a20);overflow:hidden}
+.beam{flex:1 1 auto;min-height:22vh;width:3px;margin:-6rem 0 1.2rem;background:linear-gradient(transparent,#fff 55%,#fff);box-shadow:0 0 18px 4px rgba(255,255,255,.55),0 0 90px 22px rgba(18,146,112,.55);border-radius:3px}
+.word{margin:-.32em 0 -.42em;padding:.32em .12em .5em;font:900 clamp(7rem,40vw,24rem)/1.25 "Alexandria",sans-serif;background:linear-gradient(180deg,#fff 30%,#7fd9bd);-webkit-background-clip:text;background-clip:text;color:transparent;position:relative}
+.end .h2{font-size:clamp(1.5rem,6vw,2.8rem);margin-top:.6rem;position:relative}
+.stores{display:flex;gap:.7rem;margin-top:1.8rem;position:relative}
+.store{display:flex;flex-direction:column;align-items:flex-start;min-width:9.2rem;padding:.6rem 1.15rem;border-radius:.9rem;background:#fff;color:#0a0a0a;font:600 1.05rem/1.25 "Plex";direction:ltr;text-align:left}
+.store small{font:400 .68rem "Plex";color:#555;direction:rtl}
+footer{position:relative;margin-top:4rem;width:100%;max-width:60rem;padding-top:1.3rem;border-top:1px solid rgba(255,255,255,.14);font-size:.8rem;color:rgba(255,255,255,.6)}
+footer nav{display:flex;justify-content:center;flex-wrap:wrap;gap:.4rem 1.4rem}
+footer a{text-decoration:none;color:rgba(255,255,255,.85)}
+footer p{margin:.8rem 0 0;line-height:1.7}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}.rig{transform:none}.screen img,.rv,.step,.lines li{transition:none}.rv{opacity:1;transform:none}
+}
+
+/* شرح أوفى */
+.more{padding:4.5rem 0 0}
+.h3{margin:0 auto;padding:0 1.4rem;text-align:center;font:800 clamp(1.5rem,6.4vw,2.6rem)/1.3 "Alexandria","Plex",sans-serif}
+.more .h3:not(:first-child){margin-top:4.5rem}
+.more .tiles{margin-top:2rem}
+.more .lead{padding:0 1.4rem;text-align:center}
+.facts.light{margin-top:2rem}
+.facts.light div{border-top:1px solid var(--border)}
+.facts.light span{color:var(--muted)}
+@media (min-width:640px){.tiles.two{grid-template-columns:1fr 1fr;width:min(100% - 2.4rem,40rem)}}
+@media (min-width:1000px){.more .tiles:not(.two){grid-template-columns:repeat(4,1fr);width:min(100% - 2.4rem,68rem)}.tiles.two{grid-template-columns:1fr 1fr;width:min(100% - 2.4rem,36rem)}}
+.offer{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;width:min(100% - 2.4rem,30rem);margin:2rem auto 0}
+.offer div{border-radius:1.3rem;padding:1.1rem 1.2rem;background:var(--soft)}
+.offer small{display:block;color:var(--muted);font-size:.78rem}
+.offer b{display:block;margin-top:.2rem;font:800 1.5rem "Alexandria","Plex",sans-serif;direction:ltr;text-align:right}
+.offer .mine{background:linear-gradient(135deg,#f3cf6b,#e2a92f);color:#1d1503}.offer .mine small{color:#4a3a10}
+.garage .tiles{margin-top:3rem;text-align:start}
+.garage .tile{background:rgba(255,255,255,.08);color:#fff}
+.garage .tile .shot{background:linear-gradient(180deg,rgba(255,255,255,.14),transparent)}
+.garage .tile p{color:rgba(255,255,255,.72)}
+@media (min-width:1000px){.garage .tiles{grid-template-columns:repeat(3,1fr);width:min(100% - 2.4rem,54rem)}}
+.skyy{padding:6rem 0 2rem}
+.ph{position:relative;margin:0;flex:0 0 min(58vw,15rem);scroll-snap-align:center;text-align:center}
+.ph img{width:100%;border-radius:1.6rem;border:1px solid var(--border);box-shadow:0 20px 40px -22px rgba(0,0,0,.5)}
+.ph figcaption{margin-top:.8rem;font:600 .95rem "Plex";color:var(--muted)}
+@media (min-width:1100px){.skyy .row{justify-content:center;overflow:visible}.ph{flex:0 1 13rem}}
+.from{margin:.5rem 0 0;position:relative;color:rgba(255,255,255,.7);font-size:1rem}
+
+/* الإحصاءات */
+.stats{padding-bottom:1rem}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;width:min(100% - 2.4rem,54rem);margin:2.6rem auto 0;text-align:center}
+.trio div{padding:1.2rem .4rem;border-radius:1.4rem;background:var(--soft)}
+.trio b{display:block;font:900 clamp(2.2rem,11vw,4.6rem)/1.1 "Alexandria",sans-serif;color:var(--brand)}
+.trio b small{font:800 .34em "Alexandria","Plex",sans-serif;color:var(--fg)}
+.trio span{display:block;margin-top:.4rem;color:var(--muted);font-size:.82rem;line-height:1.6}
+@media (min-width:768px){.trio span{font-size:1rem}.trio div{padding:2rem 1rem}}
+.stats .tiles{margin-top:2rem}
+@media (min-width:1000px){.stats .tiles{grid-template-columns:repeat(3,1fr);width:min(100% - 2.4rem,54rem)}}
+.stats .facts.light{margin-top:2.4rem}
+
+/* بطاقات إحصاءات حيّة */
+.lives{display:flex;gap:.9rem;margin-top:2rem;padding:0 1.2rem 1rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.lives::-webkit-scrollbar{display:none}
+.live{flex:0 0 min(84vw,21rem);scroll-snap-align:center;border-radius:1.8rem;overflow:hidden;background:var(--soft);text-align:start;box-shadow:0 24px 50px -30px rgba(0,0,0,.5)}
+.live header{padding:1.3rem 1.3rem 1.1rem;color:#fff;background:radial-gradient(120% 90% at 85% 0%,#1b7d60,#0e5440 55%,#0a3a2c)}
+.live small{display:block;font:600 .76rem "Plex";color:var(--gold)}
+.live h3{margin:.25rem 0 0;font:800 1.25rem/1.4 "Alexandria","Plex",sans-serif;min-height:1.75rem}
+.live header p{margin:.7rem 0 0;font-size:.78rem;color:rgba(255,255,255,.72)}
+.live .num{display:block;font:900 3rem/1.15 "Alexandria",sans-serif;font-variant-numeric:tabular-nums;direction:ltr;text-align:right}
+.bars{display:flex;align-items:flex-end;gap:.4rem;height:6.2rem;margin-top:.6rem;direction:rtl}
+.bars i{flex:1;height:6%;border-radius:.45rem .45rem .2rem .2rem;background:rgba(255,255,255,.3);transition:height .9s cubic-bezier(.2,.8,.2,1),background .5s}
+.bars i.max{background:#fff}
+.days{display:flex;gap:.4rem;margin-top:.4rem;direction:rtl}
+.days span{flex:1;text-align:center;font-size:.66rem;color:rgba(255,255,255,.7)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;padding:1rem}
+.kpis div{padding:.8rem .3rem;border-radius:1rem;background:var(--bg);text-align:center}
+.kpis b{display:block;font:800 1.3rem "Alexandria","Plex",sans-serif;font-variant-numeric:tabular-nums;direction:ltr}
+.kpis span{font-size:.72rem;color:var(--muted)}
+.chips{display:flex;gap:.4rem;margin-top:.9rem}
+.chips span{font:600 .78rem "Plex";padding:.3rem .95rem;border-radius:99px;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.8);transition:all .4s}
+.chips span.on{background:#fff;color:#0b3b2e;border-color:#fff}
+.rows,.top{list-style:none;margin:0;padding:1rem 1.2rem 1.2rem;display:grid;gap:.85rem}
+.rows li{display:grid;grid-template-columns:4.6rem 1fr 2.4rem;align-items:center;gap:.6rem;font-size:.88rem}
+.rows .track{height:.6rem;border-radius:99px;background:color-mix(in srgb,var(--fg) 9%,transparent);overflow:hidden}
+.rows .fill{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#e9b949,#129270);transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.rows b,.top b{font:800 .95rem "Alexandria","Plex",sans-serif;font-variant-numeric:tabular-nums;direction:ltr;text-align:left}
+.spark{display:block;width:100%;height:4.6rem;margin-top:.5rem;direction:ltr}
+.spark path[data-k=line]{fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.spark path[data-k=area]{fill:rgba(255,255,255,.14);stroke:none}
+.top li{display:grid;grid-template-columns:1.4rem 1fr auto;align-items:center;gap:.6rem;font-size:.88rem;transition:transform .6s}
+.top i{font:800 .8rem "Alexandria",sans-serif;color:var(--brand);font-style:normal}
+.note{margin:.6rem 1.4rem 0;text-align:center;font-size:.76rem;color:var(--muted)}
+@media (min-width:1000px){.lives{display:grid;grid-template-columns:repeat(3,1fr);width:min(100% - 2.4rem,66rem);margin:2.4rem auto 0;padding:0;overflow:visible}}
+@media (prefers-reduced-motion:reduce){.bars i,.rows .fill{transition:none}}
+
+/* 27/11 13:27: الإحصاءات أكبر، وكل بطاقة تبدأ من الصفر حين تظهر */
+.lives{display:grid;grid-template-columns:1fr;gap:1.1rem;overflow:visible;padding:0 1.2rem}
+.live{flex:none}
+.live header{padding:1.6rem 1.5rem 1.3rem}
+.live small{font-size:.84rem}
+.live h3{font-size:clamp(1.15rem,5.6vw,1.45rem);min-height:2.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.live .num{font-size:clamp(4rem,21vw,6rem);line-height:1.1;letter-spacing:-.01em}
+.bars{height:9.5rem;gap:.5rem;margin-top:.8rem}
+.bars i{transition:height 1.6s cubic-bezier(.2,.8,.2,1),background .5s}
+.days span{font-size:.74rem}
+.kpis{gap:.6rem;padding:1.1rem}
+.kpis div{padding:1.1rem .3rem}
+.kpis b{font-size:clamp(1.6rem,7.6vw,2.2rem)}
+.kpis span{font-size:.8rem}
+.rows,.top{padding:1.3rem 1.4rem 1.5rem;gap:1.15rem}
+.rows li{grid-template-columns:5rem 1fr 3.6rem;font-size:1rem}
+.rows .track{height:.85rem}
+.rows .fill{transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.rows b,.top b{font-size:1.25rem}
+.top li{font-size:1rem;grid-template-columns:1.6rem 1fr auto}
+.spark{height:6.5rem}
+.spark path[data-k=line]{stroke-width:3;transition:stroke-dashoffset 2.2s cubic-bezier(.3,.7,.2,1)}
+.spark path[data-k=area]{transition:opacity 1.4s .9s}
+@media (min-width:1000px){.lives{grid-template-columns:repeat(3,1fr);width:min(100% - 2.4rem,78rem);margin:2.4rem auto 0;padding:0}.live .num{font-size:4.6rem}}
