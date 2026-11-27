@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yusr — your work, home and vehicle in one place</title>
+<meta name="description" content="Yusr: jobs, homes and vehicles in one app. A clear salary before you apply, a 360 tour inside the home before you visit, and an inspection report for the car before you go.">
+<meta name="theme-color" content="#eef7f2">
+<link rel="icon" type="image/png" href="../icon.png">
+<meta property="og:title" content="Yusr — your work, home and vehicle in one place">
+<meta property="og:description" content="Jobs, homes and vehicles in one app.">
+<meta property="og:type" content="website">
+<!--
+  Yusr website v4 (27/11). Motion patterns follow designer components from 21st.dev, rebuilt in plain CSS/JS:
+  - Hero: "Phone Scroll Hero" by Ruixen UI (MIT) — a tilted phone that flattens and climbs over the headline.
+  - Screens strip: the curved filmstrip pattern ("images curve in from one edge, flatten at the centre, fade away").
+  - Home: scroll-to-scale media. Vehicle: giant type around the media. Safety: scroll-highlighted word list.
+  Screens are real app screenshots. The 360 viewer and the 3D car are the app's own shader and model.
+-->
+<link rel="alternate" hreflang="ar" href="https://yusrapp.net/">
+<link rel="alternate" hreflang="en" href="https://yusrapp.net/en/">
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+<div class="sky" aria-hidden="true"><div class="sun"><i class="disc"></i><i class="ring"></i><i class="ring r2"></i><i class="ring r3"></i></div><div class="haze"></div></div>
+<header class="bar" id="bar">
+  <a href="#top" class="brand" aria-label="Yusr"><img src="../wordmark.png" alt="Yusr"></a>
+  <nav aria-label="Page sections">
+    <a href="#work">Work</a><a href="#home">Home</a><a href="#cars">Vehicle</a><a href="#ai">Assistant</a><a href="#stats">Statistics</a><a href="#safe">Safety</a>
+  </nav>
+  <span class="acts"><a class="lang" href="../" lang="ar">عربي</a><a class="get" href="#get">Soon</a></span>
+</header>
+
+<main id="top">
+<!-- 1 · Intro -->
+<section class="hero" id="hero" aria-label="Intro">
+  <div class="stage">
+    <div class="title" id="title">
+      <p class="eyebrow">Jobs · Homes · Vehicles</p>
+      <h1>Your work, home and vehicle<span>in one place</span></h1>
+    </div>
+    <div class="rig" id="rig">
+      <div class="phone">
+        <span class="btn b1" aria-hidden="true"></span><span class="btn b2" aria-hidden="true"></span><span class="btn b3" aria-hidden="true"></span>
+        <div class="body"><div class="screen" id="heroScreen">
+          <div class="island" aria-hidden="true"></div>
+          <!--HERO_SHOTS-->
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · شريط الشاشات -->
+<section class="focus" id="focus" aria-label="App screens">
+  <h2 class="h2 rv">Every screen,<br>as it is.</h2>
+  <p class="lead rv">One account for jobs, homes and vehicles. Each world has its own screens and rules, and they never mix.</p>
+  <div class="arc" id="arc" dir="ltr" aria-hidden="true"></div>
+</section>
+
+<!-- 3 · Work -->
+<section class="chapter" id="work">
+  <div class="intro">
+    <p class="label rv">Work</p>
+    <h2 class="h2 rv">A clear salary.<br>Before you apply.</h2>
+    <p class="lead rv">Jobs that match your profession, with every detail: pay, hours and place.</p>
+  </div>
+  <figure class="photo rv"><img src="../p/work.webp" alt="A woman following her job application on her phone" loading="lazy"></figure>
+  <div class="pin" id="workPin">
+    <div class="stick">
+      <div class="steps" id="steps">
+        <div class="step on"><b>Search your field</b><span>Medicine, engineering, teaching, restaurants and more, within the range around you.</span></div>
+        <div class="step"><b>Know everything first</b><span>Hours, working days and the workplace on the map, on one page.</span></div>
+        <div class="step"><b>A CV that suits you</b><span>Elegant templates you fill in once and export as a PDF.</span></div>
+        <div class="step"><b>Follow it step by step</b><span>From “Sent” to “Decision”, and you know when your application was seen.</span></div>
+      </div>
+      <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+      <div class="phone flat">
+        <div class="body"><div class="screen" id="workScreen">
+          <div class="island" aria-hidden="true"></div>
+          <img class="on" src="../s_en/search.webp" alt="Job search screen" loading="lazy">
+          <img src="../s_en/job2.webp" alt="Job details" loading="lazy">
+          <img src="../s_en/cv.webp" alt="The CV in the app" loading="lazy">
+          <img src="../s_en/job.webp" alt="Application status" loading="lazy">
+        </div></div>
+      </div>
+    </div>
+  </div>
+  <div class="more">
+    <h3 class="h3 rv">For job seekers</h3>
+    <div class="tiles">
+      <article class="tile rv"><div class="shot"><img src="../s_en/home.webp" alt="Job seeker home screen" loading="lazy"></div><h3>Jobs that fit you</h3><p>Yusr knows your profession and level, so it suggests what suits you, and never offers a doctor a nurse’s job.</p></article>
+      <article class="tile rv"><div class="shot"><img src="../s_en/jobs_list.webp" alt="Nearby jobs" loading="lazy"></div><h3>Near you</h3><p>Within 1, 3 or 10 km of you. Your location is never stored or shared.</p></article>
+      <article class="tile rv"><div class="shot"><img src="../s_en/job2.webp" alt="Job details" loading="lazy"></div><h3>Every detail on one page</h3><p>Monthly salary or daily wage, hours and place, and ratings from people who really worked there.</p></article>
+      <article class="tile rv"><div class="shot"><img src="../s_en/apps.webp" alt="My applications" loading="lazy"></div><h3>Know where each application stands</h3><p>From “Sent” to “Decision”, then a chat with the employer inside the app.</p></article>
+    </div>
+    <h3 class="h3 rv">And for employers</h3>
+    <div class="tiles two">
+      <article class="tile rv"><div class="shot"><img src="../s_en/applicant.webp" alt="An application as the employer sees it" loading="lazy"></div><h3>Review applicants one by one</h3><p>See who you reviewed and who is waiting, and invite to an interview with a clear time and place.</p></article>
+      <article class="tile rv"><div class="shot"><img src="../s_en/jobemp.webp" alt="Your job post as the employer sees it" loading="lazy"></div><h3>Your job post and its numbers</h3><p>Who viewed it and who applied, day by day.</p></article>
+    </div>
+    <div class="facts light"><div class="rv"><b>Shortlist</b><span>A star for those who deserve it, and private notes only you can see.</span></div><div class="rv"><b>Daily or monthly pay</b><span>Day labour has its own field.</span></div><div class="rv"><b>Jobs from official sites</b><span>Posted by Yusr’s team; you apply on the organisation’s own site.</span></div></div>
+  </div>
+</section>
+
+<!-- 4 · Home -->
+<section class="chapter" id="home">
+  <div class="grow" id="grow">
+    <div class="stick">
+      <div class="intro" id="growTitle">
+        <p class="label">Home</p>
+        <h2 class="h2">Step inside.<br>Before you visit.</h2>
+        <p class="lead">A 360 tour inside the home, room by room.</p>
+      </div>
+      <div class="frame" id="frame">
+        <canvas id="pano" aria-label="360 tour inside a home: drag to look around"></canvas>
+        <div class="tour-ui" id="tourUi">
+          <span class="deg" aria-hidden="true">360°</span>
+          <div class="rooms" id="rooms"></div>
+          <p class="hint">Drag to look around · illustrative 360 photos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tiles">
+    <article class="tile rv"><div class="shot"><img src="../s_en/listing.webp" alt="A property page in the app" loading="lazy"></div><h3>Homes shown as they are</h3><p>Large photos, clear badges and full details before you ask.</p></article>
+    <article class="tile rv"><div class="shot"><img src="../s_en/tourhub.webp" alt="Capturing a home tour" loading="lazy"></div><h3>Shoot your home tour with your phone</h3><p>Room by room, in any order, and the app guides you shot by shot.</p></article>
+    <article class="tile rv"><div class="shot"><img src="../s_en/project.webp" alt="A development project page" loading="lazy"></div><h3>A whole project before it is built</h3><p>Unit types, prices and handover date, on the developer’s page.</p></article>
+    <article class="tile rv"><div class="shot"><img src="../s_en/units.webp" alt="Unit availability board" loading="lazy"></div><h3>Floor by floor</h3><p>Available, reserved and sold, and you ask for a specific unit.</p></article>
+  </div>
+  <div class="more">
+    <h3 class="h3 rv">The price stays between you and the owner</h3>
+    <p class="lead rv">In your interest request you write the price that suits you. It reaches the owner only, and no one else sees it. No bidding, no auction.</p>
+    <div class="offer rv" aria-hidden="true"><div><small>Listed price</small><b>$95,000</b></div><div class="mine"><small>Your price · only the owner sees it</small><b>$88,000</b></div></div>
+    <div class="facts light"><div class="rv"><b>Interest request</b><span>Your price only, no phone numbers and no links.</span></div><div class="rv"><b>Accepted, then a chat</b><span>No messages before the owner accepts your request.</span></div><div class="rv"><b>Numbers by mutual consent</b><span>Each of you sees the other’s number only when you both agree.</span></div></div>
+    <h3 class="h3 rv">Shoot your home tour with your phone</h3>
+    <div class="facts light"><div class="rv"><b>Stand in the middle of the room</b><span>Rings of light show you the next shot.</span></div><div class="rv"><b>The phone stitches the room itself</b><span>The shots are joined on the phone until the room becomes a sphere you can look around.</span></div><div class="rv"><b>Day, dusk and night</b><span>Shoot the room at different times; the visitor switches between them.</span></div><div class="rv"><b>Blur what you want hidden</b><span>A family photo or a screen: mark it and it is covered with the Yusr logo.</span></div><div class="rv"><b>Link rooms through their doors</b><span>The visitor moves from room to room as if walking.</span></div><div class="rv"><b>The Yusr 360 badge</b><span>It appears on your listing when the tour is complete.</span></div></div>
+    <h3 class="h3 rv">And for developers</h3>
+    <div class="facts light"><div class="rv"><b>A page with your identity</b><span>All your projects, with your logo and licence.</span></div><div class="rv"><b>A payment plan the buyer can work out</b><span>Down payment, number of months and the monthly instalment.</span></div><div class="rv"><b>A QR code for every project</b><span>A sticker that opens the project page from any sign.</span></div></div>
+  </div>
+</section>
+
+<!-- 5 · Vehicle -->
+<section class="garage" id="cars">
+  <p class="label rv">Vehicle</p>
+  <div class="sand">
+    <span class="big top" aria-hidden="true">Know its state</span>
+    <div class="stage3d"><div class="floor" aria-hidden="true"></div><canvas id="car" aria-label="3D car model: tap a part to colour it"></canvas></div>
+    <span class="big bot" aria-hidden="true">before you go</span>
+  </div>
+  <h2 class="sr">Know its state before you go</h2>
+  <p class="lead rv">An inspection report that colours the car part by part. Try it: pick a state, then tap a part.</p>
+  <div class="states" id="states" role="group" aria-label="Part state"></div>
+  <p class="sum" id="carSum" aria-live="polite"></p>
+  <div class="tiles">
+    <article class="tile rv"><div class="shot"><img src="../s_en/vehicle.webp" alt="A vehicle listing" loading="lazy"></div><h3>A listing that answers the questions</h3><p>Full specs, the state of every part, and a test-drive booking.</p></article>
+    <article class="tile rv"><div class="shot"><img src="../s_en/postv.webp" alt="New vehicle listing" loading="lazy"></div><h3>List your vehicle in minutes</h3><p>Choose the type and fill in the details. Your phone number never appears in the listing.</p></article>
+    <article class="tile rv"><div class="shot"><img src="../s_en/showroom.webp" alt="Showroom home screen" loading="lazy"></div><h3>Your showroom on one screen</h3><p>Your listings, branches and new requests, at first glance.</p></article>
+  </div>
+  <div class="facts"><div class="rv"><b>From motorbikes to trucks</b><span>Cars, bikes, trucks, farm and construction machinery.</span></div><div class="rv"><b>New and used</b><span>From owners, showrooms and dealerships, in dollars or Syrian pounds.</span></div><div class="rv"><b>Book a test drive</b><span>You choose the time, and your request reaches the showroom in order.</span></div></div>
+</section>
+
+<!-- 6 · Yusr Assistant -->
+<section class="chapter ai" id="ai">
+  <div class="intro">
+    <p class="label rv">Yusr Assistant</p>
+    <h2 class="h2 rv">It drafts.<br>You decide.</h2>
+    <p class="lead rv">An AI assistant inside the app: it writes your job description, your bio or your property listing with you, and you review and edit before publishing.</p>
+    <p class="soon rv">Coming after launch · where the service is available</p>
+  </div>
+  <div class="aicard rv" id="aiCard" aria-label="An example of the assistant at work">
+    <div class="aihead">
+      <span class="aiorb"><canvas id="aiMark" aria-hidden="true"></canvas><svg class="aimark" viewBox="10 10 80 80" aria-hidden="true"><defs><linearGradient id="aiG" gradientUnits="userSpaceOnUse" x1="79.7" y1="20.3" x2="20.3" y2="79.7"><stop offset="0" stop-color="#2FC489"/><stop offset=".45" stop-color="#8FEBC0"/><stop offset=".8" stop-color="#F2FFF8"/><stop offset="1" stop-color="#FFE08A"/></linearGradient></defs><path d="M80.0 50.0 80.0 51.6 79.8 53.1 79.6 54.7 79.4 56.2 79.0 57.8 78.5 59.3 78.0 60.8 77.4 62.2 76.7 63.6 76.0 65.0 75.2 66.4 74.3 67.7 73.3 68.9 72.3 70.1 71.2 71.2 70.1 72.3 68.9 73.4 67.7 74.3 66.4 75.2 65.1 76.1 63.7 76.9 62.3 77.6 60.8 78.2 59.3 78.8 57.8 79.2 56.3 79.7 54.8 80.0 53.2 80.3 51.6 80.5 50.0 80.7 48.4 80.7 46.8 80.8 45.1 80.7 43.5 80.6 41.8 80.5 40.2 80.3 38.5 80.1 36.7 79.8 34.9 79.5 33.1 79.2 31.2 78.9 29.2 78.6 27.1 78.2 24.9 77.9 22.4 77.6 22.1 75.1 21.8 72.9 21.4 70.8 21.1 68.8 20.8 66.9 20.5 65.1 20.2 63.3 19.9 61.5 19.7 59.8 19.5 58.2 19.4 56.5 19.3 54.9 19.2 53.2 19.3 51.6 19.3 50.0 19.5 48.4 19.7 46.8 20.0 45.2 20.3 43.7 20.8 42.2 21.2 40.7 21.8 39.2 22.4 37.7 23.1 36.3 23.9 34.9 24.8 33.6 25.7 32.3 26.6 31.1 27.7 29.9 28.8 28.8 29.9 27.7 31.1 26.7 32.3 25.7 33.6 24.8 35.0 24.0 36.4 23.3 37.8 22.6 39.2 22.0 40.7 21.5 42.2 21.0 43.8 20.6 45.3 20.4 46.9 20.2 48.4 20.0 50.0 20.0 51.6 20.0 53.1 20.2 54.7 20.4 56.2 20.7 57.8 21.0 59.3 21.5 60.8 22.0 62.2 22.6 63.6 23.3 65.0 24.0 66.3 24.8 67.6 25.7 68.9 26.7 70.1 27.7 71.2 28.8 72.3 29.9 73.3 31.1 74.3 32.4 75.2 33.7 76.0 35.0 76.7 36.4 77.4 37.8 78.0 39.2 78.5 40.7 79.0 42.2 79.3 43.8 79.6 45.3 79.8 46.9 80.0 48.4Z" fill="url(#aiG)"/></svg></span>
+      <div><b>Yusr Assistant</b><small id="aiState">Ready</small></div>
+    </div>
+    <div class="airow"><p class="aiwhere" id="aiWhere">Job description</p><span class="aiask" id="aiAsk">Write it for me</span></div>
+    <p class="aiout" id="aiOut"></p>
+    <div class="aibtns"><span class="use">Use</span><span>Another draft</span><span>Cancel</span></div>
+  </div>
+  <ul class="aichips rv" aria-label="What it helps with">
+    <li>Job description</li><li>Your CV bio</li><li>Property description</li><li>Your CV in English</li><li>Is my CV a fit?</li><li>Summarize applicants</li>
+  </ul>
+  <div class="facts light rv">
+    <div><b>It suggests, you decide</b><span>Nothing is published before you review it and tap “Use”.</span></div>
+    <div><b>Right where you write</b><span>A small button where you type: in the job form, the CV builder and the property listing.</span></div>
+    <div><b>For jobs and homes</b><span>It helps with your listing and your CV, nothing more.</span></div>
+  </div>
+  <p class="note">The texts in the card are illustrative examples.</p>
+</section>
+
+<!-- 7 · Statistics -->
+<section class="chapter stats" id="stats">
+  <div class="intro">
+    <p class="label rv">Statistics</p>
+    <h2 class="h2 rv">Real numbers.<br>No guessing.</h2>
+    <p class="lead rv">Every listing has its numbers: who viewed it and how many requests it got. And the whole market has maps and reports built from Yusr’s own listings.</p>
+  </div>
+  <div class="lives" id="lives" tabindex="0" aria-label="Live examples of the statistics screens">
+    <article class="live" data-live="ad">
+      <header>
+        <small>Listing statistics</small>
+        <h3 data-k="title">Apartment for sale · Mazzeh</h3>
+        <p>Views in the last 7 days</p>
+        <b class="num" data-k="views">0</b>
+        <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="days" aria-hidden="true"><span>Sa</span><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Today</span></div>
+      </header>
+      <div class="kpis"><div><b data-k="today">0</b><span>Today</span></div><div><b data-k="req">0</b><span>Requests</span></div><div><b data-k="rate">0%</b><span>Request rate</span></div></div>
+    </article>
+    <article class="live" data-live="demand">
+      <header>
+        <small>Demand map</small>
+        <h3>Where are people looking?</h3>
+        <p>People looking for a home in each governorate</p>
+        <div class="chips" aria-hidden="true"><span class="on" data-m="0">Buy</span><span data-m="1">Rent</span></div>
+      </header>
+      <ul class="rows" data-k="rows"></ul>
+    </article>
+    <article class="live" data-live="dealer">
+      <header>
+        <small>My showroom statistics</small>
+        <h3>Views of your listings</h3>
+        <p>In the last 7 days</p>
+        <b class="num" data-k="total">0</b>
+        <svg class="spark" viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path data-k="area" d=""/><path data-k="line" d=""/></svg>
+      </header>
+      <ul class="top" data-k="top"></ul>
+    </article>
+  </div>
+  <p class="note">The numbers in these cards are illustrative examples that show how statistics look in the app.</p>
+  <div class="facts light"><div class="rv"><b>For job posts too</b><span>The employer sees views and applicants for every job post.</span></div><div class="rv"><b>Market salaries</b><span>The usual salary for each profession, from Yusr jobs in the last six months.</span></div><div class="rv"><b>Vehicle market report</b><span>Used prices for each make, from published listings.</span></div><div class="rv"><b>Fair counting</b><span>One view per person per day, and your own views are not counted.</span></div><div class="rv"><b>Numbers, not names</b><span>You know how many people viewed your listing, not who they are.</span></div><div class="rv"><b>Real numbers only</b><span>When there are not enough listings to work out a number, no number is shown.</span></div></div>
+</section>
+
+<!-- 8 · Safety -->
+<section class="safe" id="safe">
+  <div class="pin" id="safePin">
+    <div class="stick">
+      <p class="label">Safety</p>
+      <h2 class="h2">Your number.<br>Until you agree.</h2>
+      <ul class="lines" id="lines">
+        <li class="on">Both numbers stay hidden until you both agree.</li>
+        <li>No messages before a request is accepted.</li>
+        <li>A “Verified” badge for proven identity.</li>
+        <li>Photos are checked before publishing.</li>
+        <li>Report without revealing who you are.</li>
+        <li>Ratings from real experience only.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · لمن -->
+<section class="who" id="who">
+  <div class="intro">
+    <h2 class="h2 rv">For every search.<br>And every offer.</h2>
+  </div>
+  <div class="row" id="whoRow" tabindex="0" aria-label="Who Yusr is for">
+    <figure class="p"><img src="../p/who_seeker.webp" alt="" loading="lazy"><b>Job seeker</b></figure>
+    <figure class="p"><img src="../p/who_employer.webp" alt="" loading="lazy"><b>Employer</b></figure>
+    <figure class="p"><img src="../p/who_owner.webp" alt="" loading="lazy"><b>Owner</b></figure>
+    <figure class="p"><img src="../p/who_agent.webp" alt="" loading="lazy"><b>Real-estate office</b></figure>
+    <figure class="p"><img src="../p/who_dealer.webp" alt="" loading="lazy"><b>Showroom and dealership</b></figure>
+    <figure class="p"><img src="../p/who_developer.webp" alt="" loading="lazy"><b>Developer</b></figure>
+  </div>
+</section>
+
+<!-- 10 · Yusr’s sky -->
+<section class="skyy" id="sky">
+  <div class="intro">
+    <p class="label rv">Yusr’s sky</p>
+    <h2 class="h2 rv">It changes<br>with your day.</h2>
+    <p class="lead rv">The home screen’s sky follows your clock: a sun by day, a moon by night. Plus dark mode, in Arabic and English.</p>
+  </div>
+  <div class="row" tabindex="0" aria-label="The app’s colours through the day">
+    <figure class="ph"><img src="../s_en/sky_noon.webp" alt="" loading="lazy"><figcaption>Day</figcaption></figure>
+    <figure class="ph"><img src="../s_en/sky_night.webp" alt="" loading="lazy"><figcaption>Night</figcaption></figure>
+    <figure class="ph"><img src="../s_en/dark_home.webp" alt="" loading="lazy"><figcaption>Dark mode</figcaption></figure>
+  </div>
+</section>
+
+<!-- 11 · أسئلة -->
+<section class="faq" id="faq">
+  <h2 class="h2 rv">Common questions.</h2>
+  <div class="qa">
+    <details><summary>Is the app free?</summary><p>Yes. Searching, applying and posting are free, and there are no fees on property listings.</p></details>
+    <details><summary>When does the other side see my number?</summary><p>When you both agree to share numbers, after the request is accepted. Until then the numbers stay hidden.</p></details>
+    <details><summary>Do I need a special camera for a 360 tour?</summary><p>No, your phone is enough. The app guides you shot by shot, then stitches the room itself.</p></details>
+    <details><summary>How does a developer or a dealership join?</summary><p>With the right account type and a verification request inside the app, then a page with your identity that you manage yourself.</p></details>
+    <details><summary>Can I use it in Arabic too?</summary><p>Yes. The app opens in your phone’s language, and you can change it in Settings any time.</p></details>
+  </div>
+</section>
+
+<!-- 12 · الخاتمة -->
+<section class="end" id="get">
+  <div class="beam" aria-hidden="true"></div>
+  <p class="word" aria-hidden="true">Yusr</p>
+  <h2 class="h2">Ease is closer than you think.</h2>
+  <p class="from">Starting in Syria, built for the whole Arab world.</p>
+  <div class="stores">
+    <span class="store"><small>Coming soon on</small>App Store</span>
+    <span class="store"><small>Coming soon on</small>Google Play</span>
+  </div>
+  <footer>
+    <nav aria-label="Links"><a href="../privacy.html">Privacy policy</a><a href="../delete-account.html">Delete account</a><a href="mailto:yusrsupport@gmail.com">Contact us</a></nav>
+    <p>© 2026 Yusr · يُسر. Screens are from the app itself. Photos of people and homes are illustrative, AI-generated.</p>
+  </footer>
+</section>
+</main>
+
+<script>window.YUSR_CFG={"root":"../","shots":"../s_en/","hero":[["welcome","Yusr’s first screen"],["home","Home screen"],["listing","A property page"],["job","A job page"],["chalet","A chalet for rent"],["showroom","A vehicle showroom"]],"rooms":[["living","Living room",-1.9],["dining","Kitchen & dining",-2.6],["bedroom","Bedroom",1.25]],"states":["Original","Touch-up","Repainted","Replaced","Rust","Damaged"],"parts":{"f_bumper":"Front bumper","hood":"Hood","fender_fl":"Front left fender","fender_fr":"Front right fender","roof":"Roof","trunk":"Trunk","r_bumper":"Rear bumper","door_fl":"Front left door","door_fr":"Front right door","door_rl":"Rear left door","door_rr":"Rear right door","quarter_rl":"Rear left quarter","quarter_rr":"Rear right quarter"},"sum":["Tap any part to colour it",", "," · of "," parts"],"ads":["Apartment for sale · Mazzeh","ICU nurse · Aleppo","Seaside chalet · Latakia","Pickup 2014 · Homs"],"gov":["Rural Damascus","Damascus","Aleppo","Homs","Latakia"],"cars":["Sedan 2016 · Damascus","4x4 2019 · Damascus","Pickup 2014 · Homs","Motorbike 2021 · Aleppo"],"ai":[[0,"Job description","Write it for me","ICU nurse wanted, with at least two years of experience, for evening shifts at a private hospital in central Aleppo. The salary is stated in the post, and transport is provided."],[1,"Your CV bio","Polish it","Accountant with five years of experience in trading companies. Skilled in financial statements and bank reconciliations, looking for a full-time role in Damascus."],[2,"Property description","Write the description","A sunny three-bedroom apartment with a living room in Mazzeh, on the third floor with a lift. Newly finished, with a fitted kitchen, close to schools and markets."]],"aiTxt":["Ready","Writing for you…","Done, review the text"]};</script>
+<script src="../site.js" defer></script>
+</body>
+</html>

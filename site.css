@@ -426,3 +426,36 @@ html{background:#eef7f2}
 .aichips li.on{background:#0b3b2e;color:#fff;border-color:#0b3b2e}
 .ai .facts.light{margin-top:2.2rem}
 @media (min-width:768px){.aiout{min-height:8.6rem}}
+
+/* 27/11 18:40 (محمد): «رفعها شوي… عم تبين السيارة اذا رفعتها تحت حرف، واعمل تحتها ظل شوي»: السيارة أعلى، وتداخلها مع السطر السفلي أقل، وظل أرضي ناعم يتبع دورانها */
+.stage3d{margin:clamp(-5rem,-10vw,-2.2rem) 0 clamp(-1.9rem,-4vw,-.8rem)}
+.floor{left:10%;right:10%;bottom:18%;height:17%;background:radial-gradient(closest-side,rgba(8,50,38,.5),rgba(8,50,38,.2) 55%,rgba(8,50,38,0));filter:blur(9px);transform-origin:50% 50%;will-change:transform}
+
+/* 27/11 18:40: رابط اللغة، وضبط الصفحة الإنجليزية (en/، اتجاه LTR) */
+.acts{display:flex;align-items:center;gap:.55rem}
+.lang{font:600 .8rem "Plex";text-decoration:none;padding:.4rem .75rem;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.5)}
+.bar.dark .lang{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.1)}
+[dir=ltr] body{line-height:1.65}
+[dir=ltr] .h2{font-size:clamp(2rem,8.6vw,4.6rem);line-height:1.16;letter-spacing:-.02em}
+[dir=ltr] .h3{line-height:1.22}
+[dir=ltr] h1 span{font-size:clamp(2.1rem,11.4vw,3rem)}
+[dir=ltr] .big{font-size:clamp(2.1rem,10.6vw,9.4rem);letter-spacing:-.03em}
+[dir=ltr] .word{font-size:clamp(6rem,31vw,21rem);line-height:1.05;margin:-.1em 0 -.14em;padding:.1em .06em .18em;letter-spacing:-.04em}
+[dir=ltr] .end .h2{font-size:clamp(1.4rem,5.6vw,2.6rem)}
+[dir=ltr] .lines li{font-size:clamp(1.02rem,4.5vw,2rem)}
+[dir=ltr] .step b{line-height:1.2}
+[dir=ltr] .store small{direction:ltr}
+[dir=ltr] .offer b{text-align:left}
+[dir=ltr] .live .num{text-align:left}
+[dir=ltr] .rows b,[dir=ltr] .top b{text-align:right}
+[dir=ltr] .bars,[dir=ltr] .days{direction:ltr}
+[dir=ltr] .rows li{grid-template-columns:7.2rem 1fr 3.6rem;font-size:.92rem}
+[dir=ltr] .aiout{line-height:1.7}
+@media (min-width:768px){[dir=ltr] h1 span{font-size:5.4rem}}
+/* بطاقة المساعد: زر الطلب في سطر عنوان الحقل (يتّسع للنص الإنجليزي) */
+.airow{display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin:1.1rem 0 .55rem}
+.airow .aiwhere{margin:0}
+.airow .aiask{margin:0;white-space:nowrap}
+.aihead small{white-space:nowrap}
+[dir=ltr] .live h3{font-size:clamp(1.02rem,4.8vw,1.3rem)}
+[dir=ltr] .rooms button{white-space:nowrap;font-size:.8rem;padding:.4rem .8rem}

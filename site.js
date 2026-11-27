@@ -7,6 +7,8 @@ var CFG = {
   rooms: [['living', 'الصالة', -1.9], ['dining', 'المطبخ والسفرة', -2.6], ['bedroom', 'غرفة النوم', 1.25]]
 };
 if (window.YUSR_CFG) for (var k in window.YUSR_CFG) CFG[k] = window.YUSR_CFG[k];
+/* النسخة الإنجليزية (en/) تمرّر مسار الجذر ومجلد الشاشات ونصوص السكربت عبر YUSR_CFG */
+var ROOT = CFG.root || '', SHOTS = CFG.shots || 's/';
 
 var $ = function (s, r) { return (r || document).querySelector(s); };
 var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
@@ -30,7 +32,7 @@ if ('IntersectionObserver' in window && !reduce) {
 /* 1 · الافتتاحية: هاتف مائل يستوي ويصعد فوق العنوان */
 var hero = $('#hero'), rig = $('#rig'), title = $('#title'), heroScreen = $('#heroScreen');
 if (!$('img', heroScreen)) CFG.hero.forEach(function (h, i) {
-  var im = new Image(); im.src = 's/' + h[0] + '.webp'; im.alt = h[1]; if (!i) im.className = 'on'; heroScreen.appendChild(im);
+  var im = new Image(); im.src = SHOTS + h[0] + '.webp'; im.alt = h[1]; if (!i) im.className = 'on'; heroScreen.appendChild(im);
 });
 (function () {
   var imgs = $$('img', heroScreen), n = 0;
@@ -49,7 +51,7 @@ function heroFrame() {
 var arc = $('#arc'), arcX = 0, arcVel = 0, arcDrag = null, arcLive = false, cards = [];
 CFG.arc.concat(CFG.arc).forEach(function (name) {
   var f = document.createElement('figure'); f.className = 'card';
-  var im = new Image(); im.src = 's/' + name + '.webp'; im.alt = ''; im.loading = 'lazy'; im.draggable = false;
+  var im = new Image(); im.src = SHOTS + name + '.webp'; im.alt = ''; im.loading = 'lazy'; im.draggable = false;
   f.appendChild(im); arc.appendChild(f); cards.push(f);
 });
 function arcFrame() {
@@ -119,7 +121,7 @@ var pano = {
   init: function () {
     var self = this, c = $('#pano'), gl = this.gl = glOf(c, { antialias: false });
     this.labels();
-    if (!gl) { c.parentElement.style.background = 'url(pano/' + CFG.rooms[0][0] + '.jpg) center/cover'; return; }
+    if (!gl) { c.parentElement.style.background = 'url(' + ROOT + 'pano/' + CFG.rooms[0][0] + '.jpg) center/cover'; return; }
     this.max = gl.getParameter(gl.MAX_TEXTURE_SIZE);
     this.pr = prog(gl, '#version 300 es\nin vec2 a;void main(){gl_Position=vec4(a,0.,1.);}', '#version 300 es\nprecision highp float;\nuniform sampler2D uA,uB;uniform float uMix,uYaw,uPitch,uF;uniform vec2 uSize,uWA,uWB;out vec4 o;\nconst float PI=3.14159265;\nvec3 dirOf(vec2 p){vec3 d=normalize(vec3(p.x,p.y,-uF));float c=cos(uPitch),s=sin(uPitch);d=vec3(d.x,d.y*c-d.z*s,d.y*s+d.z*c);c=cos(uYaw);s=sin(uYaw);return vec3(d.x*c-d.z*s,d.y,d.x*s+d.z*c);}\nvec4 pick(sampler2D t,vec3 d,vec2 w){float y=atan(d.x,-d.z),p=asin(clamp(d.y,-1.,1.));float u=y/(2.*PI)+.5;if(w.x>.5){u=fract(u)*2.;if(u>1.)u=2.-u;}return textureLod(t,vec2(u,clamp(.5-p/w.y,0.,1.)),0.);}\nvoid main(){vec2 p=gl_FragCoord.xy-uSize*.5;vec3 d=dirOf(p);vec4 a=pick(uA,d,uWA),b=pick(uB,d,uWB);o=vec4(mix(a.rgb,b.rgb,uMix),1.);}');
     var b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
@@ -143,7 +145,7 @@ var pano = {
   tex: function (name) {
     var self = this, gl = this.gl;
     if (this.cache[name]) return Promise.resolve(this.cache[name]);
-    return loadImg('pano/' + name + '.jpg').then(function (img) {
+    return loadImg(ROOT + 'pano/' + name + '.jpg').then(function (img) {
       var el = img;
       if (img.width > self.max) { var k = self.max / img.width, cv = document.createElement('canvas'); cv.width = self.max; cv.height = Math.round(img.height * k); cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height); el = cv; }
       var t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
@@ -185,6 +187,9 @@ $('#rooms').addEventListener('click', function (e) { var b = e.target.closest('b
 /* السيارة: المجسّم نفسه الذي في التطبيق (YS3D) */
 var STATES = [['ok', '#CFEBDD', 'سليم أصلي'], ['touch', '#F7E3A1', 'طلاء جزئي'], ['paint', '#F6C08A', 'مدهون'], ['new', '#A9C8F2', 'مبدّل'], ['rust', '#E99A9A', 'صدأ'], ['dmg', '#5B5F5E', 'متضرر']];
 var PARTS = { f_bumper: 'المِصدّ الأمامي', hood: 'الغطاء الأمامي', fender_fl: 'الرفرف الأمامي الأيسر', fender_fr: 'الرفرف الأمامي الأيمن', roof: 'السقف', trunk: 'الصندوق الخلفي', r_bumper: 'المِصدّ الخلفي', door_fl: 'الباب الأمامي الأيسر', door_fr: 'الباب الأمامي الأيمن', door_rl: 'الباب الخلفي الأيسر', door_rr: 'الباب الخلفي الأيمن', quarter_rl: 'الرفرف الخلفي الأيسر', quarter_rr: 'الرفرف الخلفي الأيمن' };
+if (CFG.states) STATES.forEach(function (s, i) { s[2] = CFG.states[i]; });
+if (CFG.parts) PARTS = CFG.parts;
+var SUM = CFG.sum || ['المس أيّ قطعة لتلوّنها', '، ', ' · من ', ' قطعة'];
 var hex = function (h) { return [1, 3, 5].map(function (i) { return parseInt(h.slice(i, i + 2), 16); }); };
 var m4 = {
   mul: function (a, b) { var o = new Float32Array(16); for (var i = 0; i < 4; i++) for (var j = 0; j < 4; j++) { var s = 0; for (var k = 0; k < 4; k++) s += a[k * 4 + j] * b[i * 4 + k]; o[i * 4 + j] = s; } return o; },
@@ -208,7 +213,7 @@ var car = {
     c.addEventListener('pointermove', function (e) {
       if (!self.drag) return; var dx = e.clientX - self.drag.x, dy = e.clientY - self.drag.y;
       self.drag.moved = Math.max(self.drag.moved, Math.hypot(dx, dy));
-      self.yaw = self.drag.yaw + dx / 160; self.pitch = clamp(self.drag.pitch + dy / 300, -0.05, 0.7);
+      self.yaw = self.drag.yaw + dx / 160; self.pitch = clamp(self.drag.pitch + dy / 300, -0.05, 0.5);
     });
     c.addEventListener('pointerup', function (e) { var d = self.drag; self.drag = null; if (d && d.moved < 6) self.tap(e); });
     c.addEventListener('pointercancel', function () { self.drag = null; });
@@ -216,7 +221,7 @@ var car = {
   load: function () {
     var self = this, gl = this.gl, s = atob(window.YUSR_CAR_SEDAN), u8 = new Uint8Array(s.length);
     for (var i = 0; i < s.length; i++) u8[i] = s.charCodeAt(i);
-    loadImg('car_sedan.jpg').then(function (img) {
+    loadImg(ROOT + 'car_sedan.jpg').then(function (img) {
       var m = self.parse(u8.buffer);
       m.vao = gl.createVertexArray(); gl.bindVertexArray(m.vao);
       var put = function (loc, data, size) { if (loc < 0) return; var b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, size, gl.FLOAT, false, 0, 0); };
@@ -279,7 +284,7 @@ var car = {
   },
   matrices: function (c) {
     var asp = c.clientWidth / Math.max(1, c.clientHeight), dist = Math.max(1.16, 0.56 / (Math.tan(0.25) * asp));
-    var view = m4.mul(m4.tr(0, -0.02, -dist), m4.rx(this.pitch)), vp = m4.mul(m4.persp(0.5, asp, 0.1, 20), view);
+    var view = m4.mul(m4.tr(0, 0.05, -dist), m4.rx(this.pitch)), vp = m4.mul(m4.persp(0.5, asp, 0.1, 20), view);
     var model = m4.ry(this.yaw + (this.model && this.model.front < 0 ? Math.PI : 0));
     return { vp: vp, model: model, eye: [0, Math.sin(this.pitch) * dist, Math.cos(this.pitch) * dist] };
   },
@@ -287,6 +292,9 @@ var car = {
     var gl = this.gl, m = this.model, self = this; if (!gl || !m) return;
     var c = $('#car'); fit(c, 2);
     if (!this.drag && !reduce) this.yaw += 0.0025;
+    /* الظل الأرضي يتبع الدوران والميل: أعرض حين تُرى السيارة من جانبها، وأعمق حين تُرى من أعلى */
+    if (!this.floor) this.floor = $('.floor');
+    if (this.floor) this.floor.style.transform = 'scale(' + (.6 + .4 * Math.abs(Math.cos(this.yaw))).toFixed(3) + ',' + (.75 + this.pitch * 1.5).toFixed(3) + ')';
     var mm = this.matrices(c), u = this.pr.u, cols = new Float32Array(80);
     gl.viewport(0, 0, c.width, c.height); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); gl.enable(gl.DEPTH_TEST);
     gl.useProgram(this.pr.p);
@@ -327,7 +335,7 @@ var car = {
     if (m) {
       var all = m.names.filter(function (n) { return PARTS[n]; }), set = all.filter(function (n) { return self.states[n]; });
       var counts = STATES.map(function (s) { return [set.filter(function (n) { return self.states[n] === s[0]; }).length, s[2]]; }).filter(function (x) { return x[0]; }).map(function (x) { return x[1] + ' ' + x[0]; });
-      t = (this.lastPart ? PARTS[this.lastPart] + ' · ' : '') + (counts.length ? counts.join('، ') : 'المس أيّ قطعة لتلوّنها') + ' · من ' + all.length + ' قطعة';
+      t = (this.lastPart ? PARTS[this.lastPart] + ' · ' : '') + (counts.length ? counts.join(SUM[1]) : SUM[0]) + SUM[2] + all.length + SUM[3];
     }
     $('#carSum').textContent = t;
   }
@@ -351,6 +359,7 @@ function safeSet() { var i = Math.min(lineEls.length - 1, Math.floor(pinProgress
   /* 1 · إحصائيات إعلان */
   var ad = $('[data-live=ad]', box), bars = $$('.bars i', ad), adI = -1;
   var ADS = [['شقة للبيع · المزة', [412, 538, 497, 683, 621, 874, 795], 118], ['ممرض عناية · حلب', [236, 281, 342, 305, 398, 451, 417], 96], ['شاليه بحري · اللاذقية', [520, 468, 589, 742, 968, 1124, 986], 163], ['بيك أب 2014 · حمص', [158, 187, 171, 263, 244, 336, 298], 47]];
+  if (CFG.ads) ADS.forEach(function (a, i) { a[0] = CFG.ads[i]; });
   function adStep() {
     adI = (adI + 1) % ADS.length; var d = ADS[adI], mx = Math.max.apply(null, d[1]), sum = d[1].reduce(function (a, b) { return a + b; }, 0);
     $('[data-k=title]', ad).textContent = d[0];
@@ -361,7 +370,7 @@ function safeSet() { var i = Math.min(lineEls.length - 1, Math.floor(pinProgress
   }
   /* 2 · خريطة الطلب */
   var dm = $('[data-live=demand]', box), rows = $('[data-k=rows]', dm), dmI = -1;
-  var GOV = ['ريف دمشق', 'دمشق', 'حلب', 'حمص', 'اللاذقية'], DM = [[1880, 1690, 700, 670, 310], [960, 1430, 880, 410, 520]];
+  var GOV = CFG.gov || ['ريف دمشق', 'دمشق', 'حلب', 'حمص', 'اللاذقية'], DM = [[1880, 1690, 700, 670, 310], [960, 1430, 880, 410, 520]];
   rows.innerHTML = GOV.map(function (g) { return '<li><span>' + g + '</span><span class="track"><span class="fill"></span></span><b>0</b></li>'; }).join('');
   function dmStep() {
     dmI = (dmI + 1) % DM.length; var d = DM[dmI], mx = Math.max.apply(null, d), lis = $$('li', rows);
@@ -373,6 +382,7 @@ function safeSet() { var i = Math.min(lineEls.length - 1, Math.floor(pinProgress
   /* 3 · إحصاءات المعرض */
   var dl = $('[data-live=dealer]', box), top = $('[data-k=top]', dl), line = $('[data-k=line]', dl), area = $('[data-k=area]', dl);
   var BASE = [['سيدان 2016 · دمشق', 6240], ['دفع رباعي 2019 · دمشق', 4870], ['بيك أب 2014 · حمص', 3915], ['دراجة نارية 2021 · حلب', 3395]], CARS = BASE, total = 18420, pts = [22, 30, 26, 38, 35, 46, 41, 55, 50, 63, 58, 72];
+  if (CFG.cars) BASE.forEach(function (c, i) { c[0] = CFG.cars[i]; });
   function spark(draw) {
     var w = 300, h = 80, mx = Math.max.apply(null, pts) * 1.08, mn = Math.min.apply(null, pts) * .8;
     var p = pts.map(function (v, i) { return [(i / (pts.length - 1) * w).toFixed(1), (h - (v - mn) / (mx - mn) * h).toFixed(1)]; });
@@ -537,7 +547,7 @@ onView($('#cars'), function (on) {
   live.car = on;
   if (on) {
     if (window.YUSR_CAR_SEDAN) start('car', car);
-    else if (!car.loading) { car.loading = true; var s = document.createElement('script'); s.src = 'car_sedan.js'; s.onload = function () { start('car', car); kick(); }; document.head.appendChild(s); }
+    else if (!car.loading) { car.loading = true; var s = document.createElement('script'); s.src = ROOT + 'car_sedan.js'; s.onload = function () { start('car', car); kick(); }; document.head.appendChild(s); }
   }
   kick();
 }, '600px');
